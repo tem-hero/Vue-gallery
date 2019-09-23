@@ -189,7 +189,9 @@ export default {
                             if (!node.children.length) return;
                             let ctx = this;
                             node.children[0].onload = function() {
-                                ctx.calculateRowHeight();
+                                ctx.$nextTick(() => {
+                                    ctx.calculateRowHeight();
+                                });
                             };
                         }
                     }
@@ -207,6 +209,12 @@ export default {
 </script>
 
 <style scoped>
+.gallery__nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
 .gallery {
     display: grid;
     min-height: 1340px;

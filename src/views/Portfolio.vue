@@ -1,13 +1,5 @@
 <template>
-    $END$
+    <div class="portfolio">
+        <h1>this is portfolio</h1>
+    </div>
 </template>
-
-<script>
-    export default {
-        name: "Portfolio"
-    }
-</script>
-
-<style scoped>
-
-</style>
