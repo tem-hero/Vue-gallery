@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <HomeSlider></HomeSlider>
+<!--        <HomeSlider></HomeSlider>-->
         <HomeGallery></HomeGallery>
     </div>
 </template>
@@ -20,7 +20,7 @@
 
 <style>
 .home {
-    margin-top: 36px;
+    /*margin-top: 36px;*/
 }
 
 </style>

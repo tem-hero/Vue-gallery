@@ -10,19 +10,16 @@
         </ul>
         <div class="gallery">
             <transition-group name="gal-images" tag="div" class="gallery__row">
-                <div v-for="img of rows[0]" :key="img.id + currentTag" class="gallery__item">
-                    <img :src="getImgUrl(img.src)" alt="Item" class="gallery__image">
-                </div>
+                <GalleryRow v-for="img of rows[0]" :key="img.id + currentTag" :src="img.src" class="gallery__item"
+                    @new-item="calculateRowHeight"></GalleryRow>
             </transition-group>
             <transition-group name="gal-images" tag="div" class="gallery__row">
-                <div v-for="img of rows[1]" :key="img.id + currentTag" class="gallery__item">
-                    <img :src="getImgUrl(img.src)" alt="Item" class="gallery__image">
-                </div>
+                <GalleryRow v-for="img of rows[1]" :key="img.id + currentTag" :src="img.src" class="gallery__item"
+                    @new-item="calculateRowHeight"></GalleryRow>
             </transition-group>
             <transition-group name="gal-images" tag="div" class="gallery__row">
-                <div v-for="img of rows[2]" :key="img.id + currentTag" class="gallery__item">
-                    <img :src="getImgUrl(img.src)" alt="Item" class="gallery__image">
-                </div>
+                <GalleryRow v-for="img of rows[2]" :key="img.id + currentTag" :src="img.src" class="gallery__item"
+                    @new-item="calculateRowHeight"></GalleryRow>
             </transition-group>
         </div>
         <div class="load-button-container">
@@ -39,7 +36,9 @@
 </template>
 
 <script>
-let gallery, galleryRows, gallerySection;
+import GalleryRow from '@/components/GalleryRow.vue'
+
+let gallery, galleryRows;
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -60,6 +59,14 @@ function memesOnLoad(src) {
         img.onerror = reject;
         img.src = src;
     });
+}
+
+function smallestValue(arr) {
+    let min = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < arr[min]) min = i;
+    }
+    return min;
 }
 
 export default {
@@ -98,6 +105,9 @@ export default {
             showButton: true
         }
     },
+    components: {
+        GalleryRow
+    },
     methods: {
         filterImages(e) {
             if (e.target.tagName !== 'A') return;
@@ -107,17 +117,6 @@ export default {
             this.clearRows();
             this.addItem();
         },
-        /*fillRows(arr, i = 0, minRowIndex = 0) {
-            if (i < arr.length) {
-                setTimeout(() => {
-                    this.calculateRowHeight();
-                    let minRow = this.rowHeights.reduce((iMin, x, i, arr) => x < arr[iMin] ? i : iMin, 0);
-                    this.fillRows(arr, prevRowIndex + 1, minRow);
-                }, 100);
-                let prevRowIndex = i;
-                this.rows[minRowIndex].push(arr[i]);
-            }
-        },*/
         addItem() {
             this.rows[this.minRowIndex].push(this.filteredArr[this.currentIndex]);
         },
@@ -128,32 +127,20 @@ export default {
             this.rowHeights[0] = this.rowHeights[1] = this.rowHeights[2] =
             this.currentIndex = this.minRowIndex = 0;
         },
-        /*calculateRowHeight() {
-            Array.from(galleryRows).forEach((row, index) => {
-                let elems = row.querySelectorAll('.gallery__item');
-                this.rowHeights[index] = 0;
-                for (let elem of elems) {
-                    this.rowHeights[index] += elem.getBoundingClientRect().height;
-                }
-            });
-        },*/
         calculateRowHeight() {
             Array.from(galleryRows).forEach((row, index) => {
                 let elems = row.querySelectorAll('.gallery__item');
                 this.rowHeights[index] = 0;
                 for (let elem of elems) {
-                    this.rowHeights[index] += elem.getBoundingClientRect().height;
+                    this.rowHeights[index] += Math.round(elem.getBoundingClientRect().height);
                 }
             });
             this.currentIndex++;
             if (this.currentIndex < this.filteredArr.length) {
-                this.minRowIndex = this.rowHeights.reduce((iMin, x, i, arr) => x < arr[iMin] ? i : iMin, 0);
-                setTimeout(() => this.addItem(), 50);
+                this.minRowIndex = smallestValue(this.rowHeights);
+                setTimeout(() => this.addItem(), 0);
+                // this.$nextTick(() => this.addItem());
             }
-        },
-        getImgUrl(src) {
-            if (src.startsWith('http')) return src;
-            return require(`@/assets/${src}`);
         },
         async loadMemes() {
             this.showButton = false;
@@ -180,27 +167,7 @@ export default {
     mounted() {
         this.$nextTick(() => {
             gallery = document.getElementById('gallery');
-            gallerySection = gallery.querySelector('.gallery');
             galleryRows = gallery.querySelectorAll('.gallery__row');
-            let observer = new MutationObserver(mutations => {
-                for (let mutation of mutations) {
-                    for ( let node of mutation.addedNodes) {
-                        if (node.className.includes('gallery__item')) {
-                            if (!node.children.length) return;
-                            let ctx = this;
-                            node.children[0].onload = function() {
-                                ctx.$nextTick(() => {
-                                    ctx.calculateRowHeight();
-                                });
-                            };
-                        }
-                    }
-                }
-            });
-            observer.observe(gallerySection, {
-                childList: true,
-                subtree: true
-            });
             this.filteredArr = this.allImages;
             this.addItem();
         });
@@ -229,11 +196,6 @@ export default {
 
 .gallery__item {
     margin-bottom: 30px;
-}
-
-.gallery__image {
-    width: 100%;
-    cursor: pointer;
 }
 
 .lds-facebook {
