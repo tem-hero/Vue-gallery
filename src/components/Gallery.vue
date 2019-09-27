@@ -8,18 +8,18 @@
                 </a>
             </li>
         </ul>
-        <div class="gallery">
+        <div class="gallery" >
             <transition-group name="gal-images" tag="div" class="gallery__row">
-                <GalleryRow v-for="img of rows[0]" :key="img.id + currentTag" :src="img.src" class="gallery__item"
-                    @new-item="calculateRowHeight"></GalleryRow>
+                <div v-for="img of rows[0]" :key="img.id + currentTag" class="gallery__item"
+                    ><img :src="getImgUrl(img.src)" @load="calculateRowHeight" alt="Item" class="gallery__image"></div>
             </transition-group>
             <transition-group name="gal-images" tag="div" class="gallery__row">
-                <GalleryRow v-for="img of rows[1]" :key="img.id + currentTag" :src="img.src" class="gallery__item"
-                    @new-item="calculateRowHeight"></GalleryRow>
+                <div v-for="img of rows[1]" :key="img.id + currentTag" class="gallery__item"
+                    ><img :src="getImgUrl(img.src)" @load="calculateRowHeight" alt="Item" class="gallery__image"></div>
             </transition-group>
             <transition-group name="gal-images" tag="div" class="gallery__row">
-                <GalleryRow v-for="img of rows[2]" :key="img.id + currentTag" :src="img.src" class="gallery__item"
-                    @new-item="calculateRowHeight"></GalleryRow>
+                <div v-for="img of rows[2]" :key="img.id + currentTag" class="gallery__item"
+                    ><img :src="getImgUrl(img.src)" @load="calculateRowHeight" alt="Item" class="gallery__image"></div>
             </transition-group>
         </div>
         <div class="load-button-container">
@@ -36,9 +36,6 @@
 </template>
 
 <script>
-import GalleryRow from '@/components/GalleryRow.vue'
-
-let gallery, galleryRows;
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -105,9 +102,6 @@ export default {
             showButton: true
         }
     },
-    components: {
-        GalleryRow
-    },
     methods: {
         filterImages(e) {
             if (e.target.tagName !== 'A') return;
@@ -120,6 +114,10 @@ export default {
         addItem() {
             this.rows[this.minRowIndex].push(this.filteredArr[this.currentIndex]);
         },
+        getImgUrl(src) {
+            if (src.startsWith('http')) return src;
+            return require(`@/assets/${src}`);
+        },
         clearRows() {
             for (let row of this.rows) {
                 row.splice(0, row.length);
@@ -127,19 +125,14 @@ export default {
             this.rowHeights[0] = this.rowHeights[1] = this.rowHeights[2] =
             this.currentIndex = this.minRowIndex = 0;
         },
-        calculateRowHeight() {
-            Array.from(galleryRows).forEach((row, index) => {
-                let elems = row.querySelectorAll('.gallery__item');
-                this.rowHeights[index] = 0;
-                for (let elem of elems) {
-                    this.rowHeights[index] += Math.round(elem.getBoundingClientRect().height);
-                }
-            });
+        calculateRowHeight(e) {
+            let height = e.target.height;
+            this.rowHeights[this.minRowIndex] += height;
             this.currentIndex++;
             if (this.currentIndex < this.filteredArr.length) {
                 this.minRowIndex = smallestValue(this.rowHeights);
-                setTimeout(() => this.addItem(), 0);
-                // this.$nextTick(() => this.addItem());
+                // setTimeout(() => this.addItem(), 50);
+                this.addItem();
             }
         },
         async loadMemes() {
@@ -166,8 +159,6 @@ export default {
     },
     mounted() {
         this.$nextTick(() => {
-            gallery = document.getElementById('gallery');
-            galleryRows = gallery.querySelectorAll('.gallery__row');
             this.filteredArr = this.allImages;
             this.addItem();
         });
@@ -198,41 +189,9 @@ export default {
     margin-bottom: 30px;
 }
 
-.lds-facebook {
-    display: inline-block;
-    position: relative;
-    width: 64px;
-    height: 64px;
-}
-.lds-facebook div {
-    display: inline-block;
-    position: absolute;
-    left: 6px;
-    width: 13px;
-    background: #bbbaba;
-    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-}
-.lds-facebook div:nth-child(1) {
-    left: 6px;
-    animation-delay: -0.24s;
-}
-.lds-facebook div:nth-child(2) {
-    left: 26px;
-    animation-delay: -0.12s;
-}
-.lds-facebook div:nth-child(3) {
-    left: 45px;
-    animation-delay: 0s;
-}
-@keyframes lds-facebook {
-    0% {
-        top: 6px;
-        height: 46px;
-    }
-    50%, 100% {
-        top: 19px;
-        height: 21px;
-    }
+.gallery__image {
+    width: 100%;
+    cursor: pointer;
 }
 
 .gal-images-enter-active {
