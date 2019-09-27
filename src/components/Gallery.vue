@@ -36,12 +36,7 @@
 </template>
 
 <script>
-
-function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+import getRandomIntInclusive from '@/components/getRandomIntInclusive'
 
 function ImageObj(url, ctx) {
     this.src = url;
@@ -193,23 +188,5 @@ export default {
     width: 100%;
     cursor: pointer;
 }
-
-.gal-images-enter-active {
-    transition: opacity .25s, transform .5s ease-out;
-}
-
-.gal-images-enter {
-    transform: translateY(10%);
-    opacity: 0;
-}
-
-.gal-images-leave-to, .gal-button-enter {
-    opacity: 0;
-}
-
-.gal-button-enter-active {
-    transition: opacity .5s;
-}
-
 
 </style>

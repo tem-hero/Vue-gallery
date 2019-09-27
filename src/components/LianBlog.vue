@@ -1,19 +1,19 @@
 <template>
     <main class="blog-section">
-        <div class="blog__row">
+        <transition-group name="gal-images" tag="div" class="blog__row">
             <BlogPost
                 v-for="post of rows[0]"
                 :key="post.id"
                 :post="post"
             ></BlogPost>
-        </div>
-        <div class="blog__row">
+        </transition-group>
+        <transition-group name="gal-images" tag="div" class="blog__row">
             <BlogPost
                 v-for="post of rows[1]"
                 :key="post.id"
                 :post="post"
             ></BlogPost>
-        </div>
+        </transition-group>
         <div class="load-button-container load-button-container__grid-center">
             <transition name="gal-button">
                 <div class="load-button"
@@ -29,6 +29,19 @@
 
 <script>
 import BlogPost from '@/components/BlogPost.vue'
+import getRandomIntInclusive from '@/components/getRandomIntInclusive'
+
+function PostObj(post, ctx) {
+    this.title = post.title;
+    this.content = post.body;
+    this.author = 'Jenn Pereira';
+    this.date = generateDate(new Date());
+    this.id = ctx.allPosts.length + 1;
+}
+
+function generateDate(date) {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+}
 
 export default {
     name: "LianBlog",
@@ -58,32 +71,27 @@ export default {
     methods: {
         async loadPosts() {
             this.showButton = false;
-            let response = await fetch('https://api.imgflip.com/get_memes');
-            let imgs = await response.json();
+            let response = await fetch('https://jsonplaceholder.typicode.com/posts');
+            let posts = await response.json();
             let ctx = this;
-            let imgPromises = [];
 
-            for (let i = 0; i < 3; i++) {
-                let imgObj = new ImageObj(imgs.data.memes[getRandomIntInclusive(0, 90)].url, ctx);
-                imgPromises.push(memesOnLoad(imgObj.src));
-                this.allImages.push(imgObj);
+            for (let i = 0; i < 5; i++) {
+                let post = posts[getRandomIntInclusive(0, 90)];
+                let postObj = new PostObj(post, ctx);
+                this.allPosts.push(postObj);
             }
 
-            Promise.all(imgPromises)
-                .then(() => {
-                    this.filteredArr = this.allImages;
-                    this.currentIndex = this.allImages.length - 3;
-                    this.addItem();
-                    setTimeout(() => this.showButton = true, 500);
-                });
+            this.fillBlog(this.allPosts.length - 5);
+            setTimeout(() => this.showButton = true, 500);
+        },
+        fillBlog(postsCount = 0) {
+            for (let i = postsCount; i < this.allPosts.length; i++) {
+                this.rows[i % 2].push(this.allPosts[i]);
+            }
         }
     },
     mounted() {
-        let i = 0;
-        for (let post of this.allPosts) {
-            this.rows[i % 2].push(post);
-            i++;
-        }
+        this.fillBlog();
     }
 }
 </script>

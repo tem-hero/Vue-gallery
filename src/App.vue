@@ -207,4 +207,21 @@ footer span {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+.gal-images-enter-active {
+  transition: opacity .25s, transform .5s ease-out;
+}
+
+.gal-images-enter {
+  transform: translateY(10%);
+  opacity: 0;
+}
+
+.gal-images-leave-to, .gal-button-enter {
+  opacity: 0;
+}
+
+.gal-button-enter-active {
+  transition: opacity .5s;
+}
 </style>
