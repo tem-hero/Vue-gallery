@@ -20,7 +20,7 @@
 #apps {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /*text-align: center;*/
   font-family: Roboto, sans-serif;
   font-size: 14px;
   color: #777777;
@@ -141,6 +141,7 @@ footer span {
 .load-button-container {
   height: 94px;
   position: relative;
+  text-align: center;
 }
 
 .load-button {
@@ -160,6 +161,43 @@ footer span {
 .load-button a {
   color: #ffffff;
   font-size: 13px;
+}
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 6px;
+  width: 13px;
+  background: #bbbaba;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 6px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 26px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 45px;
+  animation-delay: 0s;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 6px;
+    height: 46px;
+  }
+  50%, 100% {
+    top: 19px;
+    height: 21px;
+  }
 }
 
 .fade-enter-active, .fade-leave-active {

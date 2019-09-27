@@ -30,5 +30,6 @@
 
 .posts-section {
     grid-column: 1 / 3;
+    grid-column-gap: 30px;
 }
 </style>

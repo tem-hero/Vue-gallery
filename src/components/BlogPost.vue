@@ -1,10 +1,14 @@
 <template>
     <article class="blog__post">
-        <span class="wordpress">wordpress</span>
-        <h2 class="blog__post__title">{{ post.title }}</h2>
-        <p class="blog__post__author">{{ post.author }}</p>
-        <p class="blog__post__content">{{ post.content }}</p>
-        <time :datetime="post.date" class="blog__post__date">{{ setDate(post.date) }}</time><span class="post-icons"><i class="fa fa-share-alt-square" aria-hidden="true"></i><i class="fa fa-heart" aria-hidden="true"></i></span>
+        <div v-if="post.image"><img class="blog__post__img" :src="getImgUrl(post.imgSrc)" alt="Image"></div>
+        <section class="blog__post__section">
+            <span class="wordpress" v-if="post.wordpress">wordpress</span>
+            <h2 class="blog__post__title">{{ post.title }}</h2>
+            <p class="blog__post__author">by {{ post.author }}</p>
+            <p class="blog__post__content">{{ post.content }}</p>
+            <time :datetime="post.date" class="blog__post__date">{{ setDate(post.date) }}</time>
+            <span class="post-icons"><i class="fa fa-share-alt-square" aria-hidden="true"></i><i class="fa fa-heart" aria-hidden="true"></i></span>
+        </section>
     </article>
 </template>
 
@@ -14,7 +18,7 @@ function formatDate(d) {
     let year = d.getFullYear();
     let date = d.getDate();
     let month = months[d.getMonth()];
-    return `on ${month} ${date}, ${year}}`
+    return `on ${month} ${date}, ${year}`
 }
 
 export default {
@@ -28,6 +32,10 @@ export default {
             let dates = str.split('-');
             let date = new Date(+dates[0], dates[1] - 1, +dates[2]);
             return formatDate(date);
+        },
+        getImgUrl(src) {
+            if (src.startsWith('http')) return src;
+            return require(`@/assets/${src}`);
         }
     }
 }
@@ -35,9 +43,15 @@ export default {
 
 <style scoped>
 .blog__post {
+    margin-top: 30px;
+}
+
+.blog__post__section {
+    padding: 30px 40px;
     height: auto;
-    padding: 38px 41px;
     position: relative;
+    text-transform: none;
+    background-color: white;
 }
 
 .blog__post__title {
@@ -45,7 +59,6 @@ export default {
     font-weight: bold;
     color: #333333;
     text-transform: initial;
-    margin: 20px 0 10px;
 }
 
 .blog__post__author {
@@ -65,5 +78,14 @@ export default {
     font-size: 13px;
     color: #9a9a9a;
     margin: 20px 0 0;
+}
+
+.blog__post__img {
+    width: 100%;
+}
+
+.wordpress {
+    display: inline-block;
+    margin-bottom: 20px;
 }
 </style>
