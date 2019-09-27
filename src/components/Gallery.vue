@@ -8,7 +8,7 @@
                 </a>
             </li>
         </ul>
-        <div class="gallery">
+        <div class="gallery" >
             <transition-group name="gal-images" tag="div" class="gallery__row">
                 <GalleryRow v-for="img of rows[0]" :key="img.id + currentTag" :src="img.src" class="gallery__item"
                     @new-item="calculateRowHeight"></GalleryRow>
@@ -128,19 +128,20 @@ export default {
             this.currentIndex = this.minRowIndex = 0;
         },
         calculateRowHeight() {
-            Array.from(galleryRows).forEach((row, index) => {
-                let elems = row.querySelectorAll('.gallery__item');
-                this.rowHeights[index] = 0;
-                for (let elem of elems) {
-                    this.rowHeights[index] += Math.round(elem.getBoundingClientRect().height);
+            this.$nextTick(function() {
+                Array.from(galleryRows).forEach((row, index) => {
+                    let elems = row.querySelectorAll('.gallery__item');
+                    this.rowHeights[index] = 0;
+                    for (let elem of elems) {
+                        this.rowHeights[index] += elem.offsetHeight;
+                    }
+                });
+                this.currentIndex++;
+                if (this.currentIndex < this.filteredArr.length) {
+                    this.minRowIndex = smallestValue(this.rowHeights);
+                    this.addItem();
                 }
             });
-            this.currentIndex++;
-            if (this.currentIndex < this.filteredArr.length) {
-                this.minRowIndex = smallestValue(this.rowHeights);
-                setTimeout(() => this.addItem(), 0);
-                // this.$nextTick(() => this.addItem());
-            }
         },
         async loadMemes() {
             this.showButton = false;
@@ -196,43 +197,6 @@ export default {
 
 .gallery__item {
     margin-bottom: 30px;
-}
-
-.lds-facebook {
-    display: inline-block;
-    position: relative;
-    width: 64px;
-    height: 64px;
-}
-.lds-facebook div {
-    display: inline-block;
-    position: absolute;
-    left: 6px;
-    width: 13px;
-    background: #bbbaba;
-    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-}
-.lds-facebook div:nth-child(1) {
-    left: 6px;
-    animation-delay: -0.24s;
-}
-.lds-facebook div:nth-child(2) {
-    left: 26px;
-    animation-delay: -0.12s;
-}
-.lds-facebook div:nth-child(3) {
-    left: 45px;
-    animation-delay: 0s;
-}
-@keyframes lds-facebook {
-    0% {
-        top: 6px;
-        height: 46px;
-    }
-    50%, 100% {
-        top: 19px;
-        height: 21px;
-    }
 }
 
 .gal-images-enter-active {

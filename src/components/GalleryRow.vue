@@ -15,7 +15,6 @@
             }
         },
         mounted() {
-            // this.$nextTick(() => this.$emit('new-item'));
             setTimeout(() => this.$emit('new-item'), 50);
         }
     }
