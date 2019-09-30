@@ -3,28 +3,32 @@
 <!--        <PageHeading></PageHeading>-->
         <div class="blog-container container_center">
             <LianBlog class="posts-section"></LianBlog>
-            <div></div>
-<!--            <BlogSidebar></BlogSidebar>-->
+            <BlogSidebar></BlogSidebar>
         </div>
     </div>
 </template>
 
 <script>
     import LianBlog from '@/components/LianBlog.vue'
+    import BlogSidebar from '@/components/BlogSidebar.vue'
 
     export default {
         name: 'Blog',
         components: {
-            LianBlog
+            LianBlog,
+            BlogSidebar
         }
     }
 </script>
 
 <style>
+.blog {
+    margin-top: 10px;
+}
+
 .blog-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-    /*grid-template-columns: repeat(3, 1fr);*/
     grid-column-gap: 30px;
 }
 

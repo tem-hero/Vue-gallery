@@ -106,5 +106,4 @@ export default {
     grid-column: 1 / 3;
 }
 
-.blog__row {}
 </style>

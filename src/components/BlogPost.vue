@@ -1,43 +1,24 @@
 <template>
     <article class="blog__post">
-        <div v-if="post.image"><img class="blog__post__img" :src="getImgUrl(post.imgSrc)" alt="Image"></div>
-        <section class="blog__post__section">
+        <div v-if="post.image"><img class="blog__post__img" :src="require(`@/assets/${post.imgSrc}`)" alt="Image"></div>
+        <section class="blog__post__section white-colored">
             <span class="wordpress" v-if="post.wordpress">wordpress</span>
             <h2 class="blog__post__title">{{ post.title }}</h2>
             <p class="blog__post__author">by {{ post.author }}</p>
             <p class="blog__post__content">{{ post.content }}</p>
-            <time :datetime="post.date" class="blog__post__date">{{ setDate(post.date) }}</time>
+            <time :datetime="post.date" class="blog__post__date">on {{ setDate(post.date) }}</time>
             <span class="post-icons"><i class="fa fa-share-alt-square" aria-hidden="true"></i><i class="fa fa-heart" aria-hidden="true"></i></span>
         </section>
     </article>
 </template>
 
 <script>
-function formatDate(d) {
-    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let year = d.getFullYear();
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    return `on ${month} ${date}, ${year}`
-}
+import setDate from '@/components/setDate.vue'
 
 export default {
     name: "BlogPost",
     props: ['post'],
-    data() {
-        return {}
-    },
-    methods: {
-        setDate(str) {
-            let dates = str.split('-');
-            let date = new Date(+dates[0], dates[1] - 1, +dates[2]);
-            return formatDate(date);
-        },
-        getImgUrl(src) {
-            if (src.startsWith('http')) return src;
-            return require(`@/assets/${src}`);
-        }
-    }
+    mixins: [setDate]
 }
 </script>
 
@@ -51,7 +32,6 @@ export default {
     height: auto;
     position: relative;
     text-transform: none;
-    background-color: white;
 }
 
 .blog__post__title {

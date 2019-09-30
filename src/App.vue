@@ -1,6 +1,6 @@
 <template>
   <div id="apps">
-    <header>
+    <header class="white-colored">
       <nav>
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
@@ -12,7 +12,7 @@
     <transition name="fade" mode="out-in">
       <router-view/>
     </transition>
-    <footer></footer>
+    <footer class="white-colored"></footer>
   </div>
 </template>
 
@@ -57,7 +57,6 @@ footer {
 
 header, footer {
   width: 100%;
-  background-color: #ffffff;
   z-index: 100;
   position: relative;
 }
@@ -70,6 +69,10 @@ footer p {
 
 footer span {
   color: black;
+}
+
+.white-colored {
+  background-color: white;
 }
 
 .container_center {
