@@ -3,30 +3,53 @@
         <div v-for="skill of skills" :key="skill.id" class="about__skills__item">
             <p>{{ skill.title }}</p>
             <div class="skills__progress-container">
-                <div class="skills__progress-value" :style="{ width: skill.value + '%' }">
-                    <span class="skills__value-pseudo">{{ skill.value }}%</span>
+                <div class="skills__progress-value" :style="{ width: skill.startValue + '%' }">
+                    <span class="skills__value-pseudo">{{ skill.currentValue }}%</span>
                 </div>
-                <!--<transition appear name="progression">
-                </transition>-->
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: "AboutSkills",
-        data() {
-            return {
-                skills: [
-                    {id: 1, title: 'Photoshop', value: 90},
-                    {id: 2, title: 'Branding', value: 95},
-                    {id: 3, title: 'Photography', value: 50},
-                    {id: 4, title: 'Web Design', value: 85}
-                ]
-            }
+function scrollEventFunction() {
+    if (this.animationStarted) return;
+    if (pageYOffset > 230) this.startAnimation();
+}
+
+export default {
+    name: "AboutSkills",
+    data() {
+        return {
+            skills: [
+                {id: 1, title: 'Photoshop', value: 90, startValue: 0, currentValue: 0},
+                {id: 2, title: 'Branding', value: 95, startValue: 0, currentValue: 0},
+                {id: 3, title: 'Photography', value: 50, startValue: 0, currentValue: 0},
+                {id: 4, title: 'Web Design', value: 85, startValue: 0, currentValue: 0}
+            ],
+            animationStarted: false
         }
+    },
+    methods: {
+        animateNumbers(index) {
+            if (this.skills[index].currentValue < this.skills[index].value) {
+                this.skills[index].currentValue++;
+                setTimeout(this.animateNumbers, Math.round(5000 / this.skills[index].value), index);
+            }
+        },
+        startAnimation() {
+            this.animationStarted = true;
+            window.removeEventListener('scroll', scrollEventFunction);
+            this.skills.forEach((item, index) => {
+                item.startValue = item.value;
+                this.animateNumbers(index);
+            });
+        }
+    },
+    mounted() {
+        window.addEventListener('scroll', scrollEventFunction.bind(this));
     }
+}
 </script>
 
 <style scoped>
@@ -46,7 +69,8 @@
     position: relative;
     height: 5px;
     background-color: black;
-    animation: skillsAnimation 4s ease;
+    transition: width 5s ease;
+    /*animation: skillsAnimation 4s ease;*/
 }
 
 .skills__progress-value::after {
@@ -81,9 +105,9 @@
     transform: rotate(-45deg);
 }
 
-@keyframes skillsAnimation {
-    from {width: 0}
-}
+/*@keyframes skillsAnimation {*/
+/*    from {width: 0}*/
+/*}*/
 
 /*.progression-enter-active {*/
 /*    transition: width 4s ease;*/
