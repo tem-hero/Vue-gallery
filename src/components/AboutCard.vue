@@ -1,6 +1,6 @@
 <template>
     <div class="about__cards">
-        <div v-for="card of cards" :key="card.id" class="about__cards__item">
+        <div v-for="card of cards" :key="card.id">
             <div><img :src="require(`@/assets/${card.pic}`)" alt="CEO"></div>
             <div>
                 <dl>
@@ -31,14 +31,6 @@
     }
 </script>
 
-<style scoped>
-.about__cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 358px);
-    grid-column-gap: 30px;
-    margin-top: 15px;
-}
+<style>
 
-.about__cards__item {
-}
 </style>

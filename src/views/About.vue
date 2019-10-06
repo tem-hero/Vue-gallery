@@ -21,9 +21,9 @@
                     <about-skills></about-skills>
                 </section>
             </div>
-            <section class="about__awesome-team-text">
+            <section class="about__awesome-team__container">
                 <h2>awesome team</h2>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                <p class="about__awesome-team__text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
                     laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
                     ullamcorper suscipit.</p>
             </section>
@@ -66,15 +66,4 @@ export default {
     margin-top: 72px;
 }
 
-.about__awesome-team-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 90px;
-}
-
-.about__awesome-team-text p {
-    max-width: 650px;
-    text-align: center;
-}
 </style>

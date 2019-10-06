@@ -32,6 +32,10 @@
   padding: 0;
 }
 
+ul {
+  list-style: none;
+}
+
 body {
   background-color: #fafafa;
 }
@@ -106,7 +110,6 @@ footer span {
 
 .nav-list {
   display: flex;
-  list-style: none;
 }
 
 .nav-list li {
@@ -201,6 +204,25 @@ footer span {
     top: 19px;
     height: 21px;
   }
+}
+
+.about__awesome-team__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 90px;
+}
+
+.about__awesome-team__text {
+  max-width: 650px;
+  text-align: center;
+}
+
+.about__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 358px);
+  grid-column-gap: 30px;
+  margin-top: 15px;
 }
 
 .fade-enter-active, .fade-leave-active {
