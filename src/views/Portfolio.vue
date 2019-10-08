@@ -15,32 +15,6 @@
                         class="portfolio__next-button"
 
                     >next</a>
-                <!--<a
-                        href="#"
-                        class="portfolio__menu-show-all"
-                        @mouseenter="menuShow"
-                        @mouseleave="menuHide"
-
-                    >show all
-                    <transition name="menu-show">
-                        <ul
-                                class="portfolio__dropdown white-colored"
-                                @click.prevent="showProduct"
-                                v-show="menuShowed"
-
-                        >
-                            <li
-                                    v-for="item of menuItems"
-                                    :key="item.id"
-                                    class="portfolio__dropdown__item"
-
-                            ><a
-                                    href="#"
-                                    :data-id="item.id"
-                                    class="portfolio__dropdown__link">{{ item.name }}</a></li>
-
-                        </ul>
-                    </transition></a>-->
                 <a
                         href="#"
                         class="portfolio__menu-show-all"
@@ -86,12 +60,12 @@ export default {
                 {id: 0, title: 'Pereira Creative Agency', subtitle: 'Branding Design', date: '2015-02-28', likes: 324,
                     info: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.',
                     tags: ['Mobile App', 'UI/UX design'], roles: ['Project Designer', 'Lead Designer', 'Markerting Head'],
-                    images: ['portfolio1-1.png', 'portfolio1-2.png', 'portfolio1-3.png', 'blog-image3.png']},
+                    images: ['portfolio1-1.png', 'gallery-item5.png', 'gallery-item8.png', 'blog-image3.png']},
 
                 {id: 1, title: 'Pereira Creative Agency', subtitle: 'Branding Design', date: '2015-02-28', likes: 727,
                     info: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.',
                     tags: ['Mobile App', 'UI/UX design'], roles: ['Project Designer', 'Lead Designer', 'Markerting Head'],
-                    images: ['portfolio2-1.png', 'row2-2.png', 'blog-image1.png', 'gallery-item3.png']}
+                    images: ['portfolio2-1.png', 'gallery-item4.png', 'blog-image1.png', 'gallery-item7.png']}
             ],
             menuItems: [
                 {id: 0, name: 'Branding Design'},
@@ -116,9 +90,6 @@ export default {
             this.currentProduct = e.target.dataset.id % 2;
             this.menuHide();
         },
-        /*menuShow() {
-            this.menuShowed = true;
-        },*/
         menuShow() {
             if (this.menuShowedItems.length < this.menuItems.length) {
                 this.menuShowedItems.push(this.menuItems[this.menuShowedItems.length]);

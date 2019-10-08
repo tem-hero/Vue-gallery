@@ -223,6 +223,7 @@ footer span {
   grid-template-columns: repeat(auto-fill, 358px);
   grid-column-gap: 30px;
   margin-top: 15px;
+  justify-content: space-between;
 }
 
 .fade-enter-active, .fade-leave-active {
