@@ -8,18 +8,47 @@
                 </a>
             </li>
         </ul>
-        <div class="gallery" >
+        <div
+                @click="showModal"
+                class="gallery">
             <transition-group name="gal-images" tag="div" class="gallery__row">
-                <div v-for="img of rows[0]" :key="img.id + currentTag" class="gallery__item"
-                    ><img :src="getImgUrl(img.src)" @load="calculateRowHeight" alt="Item" class="gallery__image"></div>
+                <div
+                        v-for="img of rows[0]"
+                        :key="img.id + currentTag"
+                        class="gallery__item"
+
+                    ><img
+                        :src="getImgUrl(img.src)"
+                        :data-id="img.id"
+                        @load="calculateRowHeight"
+                        alt="Item"
+                        class="gallery__image"></div>
             </transition-group>
             <transition-group name="gal-images" tag="div" class="gallery__row">
-                <div v-for="img of rows[1]" :key="img.id + currentTag" class="gallery__item"
-                    ><img :src="getImgUrl(img.src)" @load="calculateRowHeight" alt="Item" class="gallery__image"></div>
+                <div
+                        v-for="img of rows[1]"
+                        :key="img.id + currentTag"
+                        class="gallery__item"
+
+                    ><img
+                        :src="getImgUrl(img.src)"
+                        :data-id="img.id"
+                        @load="calculateRowHeight"
+                        alt="Item"
+                        class="gallery__image"></div>
             </transition-group>
             <transition-group name="gal-images" tag="div" class="gallery__row">
-                <div v-for="img of rows[2]" :key="img.id + currentTag" class="gallery__item"
-                    ><img :src="getImgUrl(img.src)" @load="calculateRowHeight" alt="Item" class="gallery__image"></div>
+                <div
+                        v-for="img of rows[2]"
+                        :key="img.id + currentTag"
+                        class="gallery__item"
+
+                    ><img
+                        :src="getImgUrl(img.src)"
+                        :data-id="img.id"
+                        @load="calculateRowHeight"
+                        alt="Item"
+                        class="gallery__image"></div>
             </transition-group>
         </div>
         <div class="load-button-container">
@@ -32,11 +61,37 @@
                      v-else key="loader"><div></div><div></div><div></div></div>
             </transition>
         </div>
+        <ModalWindow
+                v-show="modalData.isVisible"
+                @close="closeModal"
+                @prev-img="modalPrev"
+                @next-img="modalNext">
+            <template v-slot:image><img :src="getImgUrl(modalImg)" alt="Product"></template>
+            <template v-slot:post>
+                <h2>{{ itemInfo.title }}</h2>
+                <p>{{ itemInfo.subtitle }}</p>
+                <hr class="portfolio__line">
+
+                <article class="portfolio-article">
+                    <p class="article-date">
+                        <time
+                                :datetime="itemInfo.date">
+                            {{ setDate(itemInfo.date) }}
+                        </time>
+
+                        <span>{{ itemInfo.likes }} likes</span>
+                    </p>
+                    <p>{{ itemInfo.info }}</p>
+                </article>
+            </template>
+        </ModalWindow>
     </div>
 </template>
 
 <script>
 import getRandomIntInclusive from '@/components/getRandomIntInclusive'
+import ModalWindow from '@/components/ModalWindow.vue'
+import setDate from '@/components/setDate.vue'
 
 function ImageObj(url, ctx) {
     this.src = url;
@@ -63,6 +118,10 @@ function smallestValue(arr) {
 
 export default {
     name: "Gallery",
+    components: {
+        ModalWindow
+    },
+    mixins: [setDate],
     data() {
         return {
             rows: [
@@ -80,6 +139,17 @@ export default {
                 { src: 'gallery-item8.png', tag: 'mobile all', id: 9},
                 { src: 'gallery-item9.png', tag: 'mobile all', id: 10}
             ],
+            itemInfo: [
+                {id: 0, title: 'Pereira Creative Agency', subtitle: 'Branding Design', date: '2015-02-28', likes: 324,
+                    info: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.',
+                    tags: ['Mobile App', 'UI/UX design'], roles: ['Project Designer', 'Lead Designer', 'Markerting Head'],
+                    images: ['portfolio1-1.png', 'gallery-item5.png', 'gallery-item8.png', 'blog-image3.png']},
+
+                {id: 1, title: 'Pereira Creative Agency', subtitle: 'Branding Design', date: '2015-02-28', likes: 727,
+                    info: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.',
+                    tags: ['Mobile App', 'UI/UX design'], roles: ['Project Designer', 'Lead Designer', 'Markerting Head'],
+                    images: ['portfolio2-1.png', 'gallery-item4.png', 'blog-image1.png', 'gallery-item7.png']}
+            ],
             galleryNav: [
                 { name: 'all', tag: 'all', id: 1},
                 { name: 'logo', tag: 'logo', id: 2},
@@ -94,7 +164,12 @@ export default {
             minRowIndex: 0,
             currentTag: '',
             rowHeights: [ 0, 0, 0 ],
-            showButton: true
+            showButton: true,
+            modalData: {
+                isVisible: false,
+                // img: this.allImages[this.modalData.id],
+                id: 1
+            }
         }
     },
     methods: {
@@ -150,14 +225,49 @@ export default {
                     this.addItem();
                     setTimeout(() => this.showButton = true, 500);
                 });
+        },
+        showModal(e) {
+            // console.log(src);
+            // console.log(a);
+            document.body.style.overflow = 'hidden';
+            this.modalData.id = e.target.dataset.id;
+            // this.modalData.img = this.allImages[this.modalData.id - 1].src;
+            this.modalData.isVisible = true;
+        },
+        closeModal() {
+            document.body.style.overflow = '';
+            this.modalData.isVisible = false;
+        },
+        modalPrev() {
+            if (this.modalData.id === 1) {
+                this.modalData.id = this.allImages.length;
+            } else {
+                this.modalData.id -= 1;
+            }
+        },
+        modalNext() {
+            if (this.modalData.id === this.allImages.length) {
+                this.modalData.id = 1;
+            } else {
+                this.modalData.id += 1;
+            }
         }
     },
-    mounted() {
+    computed: {
+        modalImg() {
+            return this.allImages[this.modalData.id];
+        }
+    },
+    created() {
+        this.filteredArr = this.allImages;
+        this.addItem();
+    },
+    /*mounted() {
         this.$nextTick(() => {
             this.filteredArr = this.allImages;
             this.addItem();
         });
-    },
+    }*/
 }
 </script>
 
