@@ -62,26 +62,34 @@
             </transition>
         </div>
         <ModalWindow
+                :modalId="modalData.id"
                 v-show="modalData.isVisible"
                 @close="closeModal"
                 @prev-img="modalPrev"
                 @next-img="modalNext">
-            <template v-slot:image><img :src="getImgUrl(modalImg)" alt="Product"></template>
+
+            <template v-slot:image><img
+
+                    :src="getImgUrl(modalImg)"
+                    alt="Product"
+                    class="gallery__image"
+            ></template>
+
             <template v-slot:post>
-                <h2>{{ itemInfo.title }}</h2>
-                <p>{{ itemInfo.subtitle }}</p>
+                <h2>{{ itemInfo[modalData.id % 2].title }}</h2>
+                <p>{{ itemInfo[modalData.id % 2].subtitle }}</p>
                 <hr class="portfolio__line">
 
                 <article class="portfolio-article">
                     <p class="article-date">
                         <time
-                                :datetime="itemInfo.date">
-                            {{ setDate(itemInfo.date) }}
+                                :datetime="itemInfo[modalData.id % 2].date">
+                            {{ setDate(itemInfo[modalData.id % 2].date) }}
                         </time>
 
-                        <span>{{ itemInfo.likes }} likes</span>
+                        <span>{{ itemInfo[modalData.id % 2].likes }} likes</span>
                     </p>
-                    <p>{{ itemInfo.info }}</p>
+                    <p>{{ itemInfo[modalData.id % 2].info }}</p>
                 </article>
             </template>
         </ModalWindow>
@@ -167,7 +175,6 @@ export default {
             showButton: true,
             modalData: {
                 isVisible: false,
-                // img: this.allImages[this.modalData.id],
                 id: 1
             }
         }
@@ -177,7 +184,16 @@ export default {
             if (e.target.tagName !== 'A') return;
             if (e.target.dataset.tag === this.currentTag) return;
             this.currentTag = e.target.dataset.tag;
-            this.filteredArr = this.allImages.filter(item => item.tag.includes(this.currentTag));
+
+            this.filteredArr = this.allImages
+                .filter(item => item.tag.includes(this.currentTag));
+
+            let newId = this.modalData.id = 1;
+            for (let item of this.filteredArr) {
+                item.id = newId;
+                newId++;
+            }
+
             this.clearRows();
             this.addItem();
         },
@@ -199,6 +215,7 @@ export default {
             let height = e.target.height;
             this.rowHeights[this.minRowIndex] += height;
             this.currentIndex++;
+
             if (this.currentIndex < this.filteredArr.length) {
                 this.minRowIndex = smallestValue(this.rowHeights);
                 // setTimeout(() => this.addItem(), 50);
@@ -227,26 +244,28 @@ export default {
                 });
         },
         showModal(e) {
-            // console.log(src);
-            // console.log(a);
+            if (e.target.tagName !== 'IMG') return;
+            this.modalData.id = +e.target.dataset.id;
+            this.$root.$emit('modal-showed');
+            document.body.style.paddingRight = this.scrollWidth + 'px';
             document.body.style.overflow = 'hidden';
-            this.modalData.id = e.target.dataset.id;
-            // this.modalData.img = this.allImages[this.modalData.id - 1].src;
             this.modalData.isVisible = true;
         },
         closeModal() {
-            document.body.style.overflow = '';
+            this.$root.$emit('modal-closed');
+            document.body.style.paddingRight = '';
+            document.body.style.overflow = 'auto';
             this.modalData.isVisible = false;
         },
         modalPrev() {
             if (this.modalData.id === 1) {
-                this.modalData.id = this.allImages.length;
+                this.modalData.id = this.filteredArr.length;
             } else {
                 this.modalData.id -= 1;
             }
         },
         modalNext() {
-            if (this.modalData.id === this.allImages.length) {
+            if (this.modalData.id === this.filteredArr.length) {
                 this.modalData.id = 1;
             } else {
                 this.modalData.id += 1;
@@ -255,19 +274,16 @@ export default {
     },
     computed: {
         modalImg() {
-            return this.allImages[this.modalData.id];
+            return this.filteredArr[this.modalData.id - 1].src;
+        },
+        scrollWidth() {
+            return window.innerWidth - document.documentElement.clientWidth;
         }
     },
     created() {
         this.filteredArr = this.allImages;
         this.addItem();
-    },
-    /*mounted() {
-        this.$nextTick(() => {
-            this.filteredArr = this.allImages;
-            this.addItem();
-        });
-    }*/
+    }
 }
 </script>
 
@@ -292,11 +308,11 @@ export default {
 
 .gallery__item {
     margin-bottom: 30px;
+    cursor: pointer;
 }
 
 .gallery__image {
     width: 100%;
-    cursor: pointer;
 }
 
 </style>
