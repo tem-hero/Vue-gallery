@@ -26,16 +26,23 @@ export default {
     methods: {
         fixBodyOn() {
             this.modalIsShowed = true;
+            document.body.style.paddingRight = this.scrollWidth + 'px';
+            document.body.style.overflow = 'hidden';
         },
         fixBodyOff() {
             this.modalIsShowed = false;
-        },
+            document.body.style.paddingRight = '';
+            document.body.style.overflow = 'auto';
+        }
     },
     computed: {
         fixObject() {
             return {
                 'header-modal-fix': this.modalIsShowed
             }
+        },
+        scrollWidth() {
+            return window.innerWidth - document.documentElement.clientWidth;
         }
     },
     created() {
@@ -111,6 +118,21 @@ footer span {
     padding-right: 20px;
 }
 
+.modal__backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    overflow: auto;
+}
+
+.modal {
+    position: relative;
+    z-index: 9999;
+}
+
 .container_center {
     max-width: 1140px;
     margin-left: auto;
@@ -174,6 +196,53 @@ footer span {
     color: black;
     letter-spacing: 0.45em;
     margin-top: 15px;
+}
+
+.form__top-field-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
+.form-field {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    font-size: inherit;
+    font-style: italic;
+    font-family: inherit;
+    color: #c4c4c4;
+    background-color: #fafafa;
+    border: 1px #e1e1e1 solid;
+}
+
+.form__input-field {
+    height: 40px;
+}
+
+.form__textarea-field {
+    display: block;
+    /*width: 100%;*/
+    resize: none;
+}
+
+.form__mid-field {
+    /*display: block;*/
+    width: 100%;
+}
+
+.form__submit-button {
+    margin: 25px 0;
+    padding: 12px 40px;
+    font-size: inherit;
+    text-transform: inherit;
+    font-family: inherit;
+    font-weight: 500;
+    color: white;
+    background-color: black;
+    border: none;
+    letter-spacing: 0.1em;
 }
 
 .load-button-container {

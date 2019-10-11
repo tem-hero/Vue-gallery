@@ -6,16 +6,16 @@
 </template>
 
 <script>
-    import HomeSlider from '@/components/HomeSlider.vue'
-    import HomeGallery from '@/components/Gallery.vue'
+import HomeSlider from '@/components/HomeSlider.vue'
+import HomeGallery from '@/components/Gallery.vue'
 
-    export default {
-        name: 'home',
-        components: {
-            HomeSlider,
-            HomeGallery
-        }
+export default {
+    name: 'home',
+    components: {
+        HomeSlider,
+        HomeGallery
     }
+}
 </script>
 
 <style>

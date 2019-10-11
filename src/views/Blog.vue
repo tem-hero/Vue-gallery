@@ -1,24 +1,48 @@
 <template>
     <div class="blog">
-<!--        <PageHeading></PageHeading>-->
+        <router-view
+                v-if="modalPostShow"
+                @close-post="closeModal"/>
+
+        <!--        <PageHeading></PageHeading>-->
+
         <div class="blog-container container_center">
-            <LianBlog class="posts-section"></LianBlog>
+            <LianBlog
+                    @open-post="showModal"
+                    class="posts-section"
+            ></LianBlog>
+
             <BlogSidebar></BlogSidebar>
         </div>
     </div>
 </template>
 
 <script>
-    import LianBlog from '@/components/LianBlog.vue'
-    import BlogSidebar from '@/components/BlogSidebar.vue'
+import LianBlog from '@/components/LianBlog.vue'
+import BlogSidebar from '@/components/BlogSidebar.vue'
 
-    export default {
-        name: 'Blog',
-        components: {
-            LianBlog,
-            BlogSidebar
+export default {
+    name: 'Blog',
+    components: {
+        LianBlog,
+        BlogSidebar
+    },
+    data() {
+        return {
+            modalPostShow: true
         }
+    },
+    methods: {
+        showModal() {
+            this.$root.$emit('modal-showed');
+            this.modalPostShow = true;
+        },
+        closeModal() {
+            this.$root.$emit('modal-closed');
+            this.modalPostShow = false;
+        },
     }
+}
 </script>
 
 <style>
@@ -36,4 +60,8 @@
     grid-column: 1 / 3;
     grid-column-gap: 30px;
 }
+
+/*.blog__single-post-view {
+    position: absolute;
+}*/
 </style>

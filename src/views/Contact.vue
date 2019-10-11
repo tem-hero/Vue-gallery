@@ -13,21 +13,24 @@
                     <p class="phone-number"><span>Fax:</span>  123-456-7890</p>
                 </div>
                 <form class="contact__form" action="" method="post">
-                    <div class="contact__form__top-field-container">
+                    <div class="form__top-field-container">
+
                         <label class="contact__form__top-field">
-                            <input type="text" name="name" class="contact__form__name-field" placeholder="Name">
+                            <input type="text" name="name" class="form__input-field form-field" placeholder="Name">
                         </label>
+
                         <label class="contact__form__top-field">
-                            <input type="email" name="mail" class="contact__form__mail-field" placeholder="Email">
+                            <input type="email" name="mail" class="form__input-field form-field" placeholder="Email">
                         </label>
+
                     </div>
-                    <label class="contact__form__mid-field">
-                        <textarea name="message" class="contact__form__message-field" placeholder="Message"></textarea>
+
+                    <label class="form__mid-field">
+                        <textarea name="message" class="contact__form__message-field form-field form__textarea-field" placeholder="Message"></textarea>
                     </label>
-                    <input type="submit" value="send message" class="contact__form__submit-comment">
+
+                    <input type="submit" value="send message" class="form__submit-button">
                 </form>
-<!--                <div class="adress-form">-->
-<!--                </div>-->
             </section>
 
             <div id="map">
@@ -77,7 +80,7 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
-.contact__our-values__img, .contact__form__mid-field {
+.contact__our-values__img {
     width: 100%;
 }
 
@@ -91,56 +94,13 @@
     flex-flow: wrap;
 }
 
-.contact__form__name-field, .contact__form__mail-field,
-.contact__form__message-field {
-    box-sizing: border-box;
-    padding: 10px;
-    font-size: inherit;
-    font-style: italic;
-    font-family: inherit;
-    color: #c4c4c4;
-    background-color: #fafafa;
-    border: 1px #e1e1e1 solid;
-}
-
-.contact__form__top-field-container {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 35px;
-}
-
 .contact__form__top-field {
     display: block;
     width: 48.5%;
 }
 
-.contact__form__name-field, .contact__form__mail-field {
-    width: 100%;
-    height: 40px;
-}
-
-.contact__form__name-field {
-    /*margin-right: 20px;*/
-}
-
 .contact__form__message-field {
-    width: 100%;
     height: 140px;
-    display: block;
-    resize: none;
 }
 
-.contact__form__submit-comment {
-    margin: 25px 0;
-    padding: 12px 40px;
-    font-size: inherit;
-    text-transform: inherit;
-    font-family: inherit;
-    font-weight: 500;
-    color: white;
-    background-color: black;
-    border: none;
-    letter-spacing: 0.1em;
-}
 </style>

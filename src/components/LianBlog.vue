@@ -5,6 +5,7 @@
                 v-for="post of rows[0]"
                 :key="post.id"
                 :post="post"
+                v-on="$listeners"
             ></BlogPost>
         </transition-group>
         <transition-group name="gal-images" tag="div" class="blog__row">
@@ -12,6 +13,7 @@
                 v-for="post of rows[1]"
                 :key="post.id"
                 :post="post"
+                v-on="$listeners"
             ></BlogPost>
         </transition-group>
         <div class="load-button-container load-button-container__grid-center">

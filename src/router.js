@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     mode: 'history',
@@ -20,7 +20,12 @@ export default new Router({
         {
             path: '/blog',
             name: 'blog',
-            component: () => import('./views/Blog.vue')
+            component: () => import('./views/Blog.vue'),
+            children: [
+                { path: 'post',
+                  name: 'BlogPostFull',
+                  component: () => import('./components/BlogPostFull.vue') }
+            ]
         },
         {
             path: '/about',

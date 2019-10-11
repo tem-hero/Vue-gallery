@@ -1,8 +1,8 @@
 <template>
     <transition name="modal-fade">
-        <div class="modal__backdrop"
+        <div class="modal__backdrop modal__backdrop__gallery"
              @click.prevent="close">
-            <div class="modal">
+            <div class="modal__gallery modal">
                 <div @click.stop="$emit('prev-img')" class="modal-button modal-prev"><span>&#10094;</span></div>
 
                 <transition name="fade" mode="out-in">
@@ -39,30 +39,21 @@ export default {
 </script>
 
 <style>
-.modal__backdrop {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 9000;
+.modal__backdrop__gallery {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
-    overflow: auto;
 }
 
-.modal {
-    position: relative;
-    z-index: 9999;
+.modal__gallery {
     display: flex;
     flex-flow: row wrap;
     max-width: 800px;
     min-height: 460px;
     justify-content: center;
     box-shadow: 2px 2px 20px 1px;
-    background: #FFFFFF;
+    background-color: #FFFFFF;
 }
 
 .modal__image-wrapper {

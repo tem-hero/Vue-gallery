@@ -2,12 +2,22 @@
     <article class="blog__post">
         <div v-if="post.image"><img class="blog__post__img" :src="require(`@/assets/${post.imgSrc}`)" alt="Image"></div>
         <section class="blog__post__section white-colored">
+
             <span class="wordpress" v-if="post.wordpress">wordpress</span>
             <h2 class="blog__post__title">{{ post.title }}</h2>
             <p class="blog__post__author">by {{ post.author }}</p>
-            <p class="blog__post__content">{{ post.content }}</p>
+
+            <router-link to="/blog/post">
+                <p
+                        class="blog__post__content"
+                        @click="$emit('open-post')"
+
+                >{{ post.content }}</p>
+            </router-link>
+
             <time :datetime="post.date" class="blog__post__date">on {{ setDate(post.date) }}</time>
             <span class="post-icons"><i class="fa fa-share-alt-square" aria-hidden="true"></i><i class="fa fa-heart" aria-hidden="true"></i></span>
+
         </section>
     </article>
 </template>

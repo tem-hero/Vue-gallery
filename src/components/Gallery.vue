@@ -247,14 +247,10 @@ export default {
             if (e.target.tagName !== 'IMG') return;
             this.modalData.id = +e.target.dataset.id;
             this.$root.$emit('modal-showed');
-            document.body.style.paddingRight = this.scrollWidth + 'px';
-            document.body.style.overflow = 'hidden';
             this.modalData.isVisible = true;
         },
         closeModal() {
             this.$root.$emit('modal-closed');
-            document.body.style.paddingRight = '';
-            document.body.style.overflow = 'auto';
             this.modalData.isVisible = false;
         },
         modalPrev() {
@@ -275,9 +271,6 @@ export default {
     computed: {
         modalImg() {
             return this.filteredArr[this.modalData.id - 1].src;
-        },
-        scrollWidth() {
-            return window.innerWidth - document.documentElement.clientWidth;
         }
     },
     created() {
