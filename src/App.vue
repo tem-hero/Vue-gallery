@@ -1,18 +1,34 @@
 <template>
     <div id="apps">
         <header class="white-colored" :class="fixObject">
-            <nav>
-                <router-link to="/">Home</router-link>
-                <router-link to="/about">About</router-link>
-                <router-link to="/portfolio">Portfolio</router-link>
-                <router-link to="/blog">Blog</router-link>
-                <router-link to="/contact">Contact</router-link>
-            </nav>
+            <div class="container_center header-container">
+                <img src="./assets/logo.png" alt="Logo"/>
+                <ul class="header__nav__list">
+                    <li
+                            v-for="link in headerNav"
+                            :key="link.id"
+                            class="header__nav__list__item"
+
+                    ><router-link
+
+                            :to="link.to"
+                            class="header__nav__link"
+                            exact-active-class="page-current-link"
+
+                    >{{ link.name }}</router-link>
+                    </li>
+                </ul>
+            </div>
         </header>
+
         <transition name="fade" mode="out-in">
             <router-view/>
         </transition>
-        <footer class="white-colored" :class="fixObject"></footer>
+
+        <footer class="footer-container white-colored" :class="fixObject">
+            <img src="./assets/logo.png" alt="Logo"/>
+            <p class="footer-copyrights">© 2016 <span>multix theme</span> by themeforces. all rights reserved.</p>
+        </footer>
     </div>
 </template>
 
@@ -20,6 +36,14 @@
 export default {
     data() {
         return {
+            headerNav: [
+                {id: 0, to: '/', name: 'home'},
+                {id: 1, to: '/about', name: 'about'},
+                {id: 2, to: '/portfolio', name: 'portfolio'},
+                {id: 3, to: '/blog', name: 'blog'},
+                {id: 4, to: '/contact', name: 'contact'}
+            ],
+            currentLink: '',
             modalIsShowed: false
         }
     },
@@ -77,8 +101,8 @@ body {
 
 a {
     text-decoration: none;
-    color: #6d6666;
     font-weight: bold;
+    color: #6d6666;
 }
 
 header {
@@ -100,13 +124,13 @@ header, footer {
     position: relative;
 }
 
-footer p {
+.footer-copyrights {
     font-size: 13px;
     color: #9c9c9c;
     margin-top: 36px;
 }
 
-footer span {
+.footer-copyrights span {
     color: black;
 }
 
@@ -142,10 +166,11 @@ footer span {
 .header-container, .footer-container {
     display: flex;
     align-items: center;
-    height: 100%;
 }
 
 .header-container {
+    width: 100%;
+    padding: 0 1.1rem;
     justify-content: space-between;
 }
 
@@ -154,28 +179,28 @@ footer span {
     justify-content: center;
 }
 
-.header-container img {
-    margin-left: 1.5rem;
-}
-
-.header__nav {
-    margin-right: 1.5rem;
-}
-
-.nav-list {
+.header__nav__list {
     display: flex;
 }
 
-.nav-list li {
-    margin-left: 36px;
+.header__nav__list__item {
+    margin-left: 40px;
 }
 
-.nav-list a {
-    display: block;
-}
-
+.header__nav__link:hover, .page-current-link,
 .current-link {
     color: #000;
+}
+
+.page-current-link::before {
+    content: '';
+    position: absolute;
+    width: 19px;
+    height: 1px;
+    display: block;
+    border-bottom: 1px #06060a solid;
+    margin-left: -29px;
+    margin-top: 6px;
 }
 
 .heading-font {

@@ -1,16 +1,23 @@
 <template>
     <div class="container_center" id="gallery">
-        <ul class="nav-list gallery__nav"
-            @click.prevent="filterImages">
-            <li v-for="link of galleryNav" :key="link.id">
-                <a href="#" :data-tag="link.tag" :class="{'current-link': link.tag === currentTag}">
+        <ul
+                class="gallery__nav"
+                @click.prevent="filterImages"
+        >
+            <li v-for="link of galleryNav" :key="link.id" class="gallery__nav__link">
+                <a
+                        href="#"
+                        :data-tag="link.tag"
+                        class="header__nav__link"
+                        :class="{'current-link': link.tag === currentTag}">
                     {{ link.name }}
                 </a>
             </li>
         </ul>
         <div
                 @click="showModal"
-                class="gallery">
+                class="gallery"
+        >
             <transition-group name="gal-images" tag="div" class="gallery__row">
                 <div
                         v-for="img of rows[0]"
@@ -170,7 +177,7 @@ export default {
             filteredArr: '',
             currentIndex: 0,
             minRowIndex: 0,
-            currentTag: '',
+            currentTag: 'all',
             rowHeights: [ 0, 0, 0 ],
             showButton: true,
             modalData: {
@@ -285,17 +292,36 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    border-top: 1px #e1e1e1 solid;
+    border-bottom: 1px #e1e1e1 solid;
+}
+
+.gallery__nav__link {
+    position: relative;
+    padding: 20px;
+}
+
+.gallery__nav__link:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 30px;
+    display: block;
+    border-right: 1px #e1e1e1 solid;
+    bottom: 16px;
+    right: 0;
+    transform: rotate(20deg);
 }
 
 .gallery {
-    display: grid;
+    display: flex;
     min-height: 1340px;
     margin-top: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-    grid-column-gap: 30px;
+    justify-content: space-between;
 }
 
 .gallery__row {
+    flex-basis: 360px;
     height: auto;
 }
 

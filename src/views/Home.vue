@@ -1,7 +1,7 @@
 <template>
     <div class="home">
-<!--        <HomeSlider></HomeSlider>-->
-        <HomeGallery></HomeGallery>
+        <HomeSlider/>
+        <HomeGallery/>
     </div>
 </template>
 
