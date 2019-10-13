@@ -138,6 +138,11 @@ header, footer {
     background-color: white;
 }
 
+.gallery__image {
+    display: block;
+    width: 100%;
+}
+
 .header-modal-fix {
     padding-right: 20px;
 }
@@ -205,9 +210,8 @@ header, footer {
 
 .heading-font {
     font-size: 48px;
-    font-weight: lighter;
     color: white;
-    letter-spacing: 0.075em;
+    letter-spacing: 0.225rem;
 }
 
 .heading-font span {
@@ -217,10 +221,58 @@ header, footer {
 
 .heading-font__add {
     font-size: 18px;
-    font-weight: lighter;
     color: black;
-    letter-spacing: 0.45em;
+    letter-spacing: 0.5rem;
     margin-top: 15px;
+}
+
+.heading-font__add-two {
+    margin-top: 35px;
+}
+
+.font-lighter {
+    font-weight: lighter;
+}
+
+.text__common-p {
+    margin: 30px 0;
+    line-height: 2;
+    text-transform: initial;
+    color: #777;
+}
+
+.text__regular-bold {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: initial;
+}
+
+.text__cards__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.text__cards-title {
+    font-size: 30px;
+    letter-spacing: 0.65rem;
+}
+
+.text__cards-text {
+    max-width: 650px;
+    text-align: center;
+}
+
+.bottom-cards {
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 70px;
+    justify-content: space-between;
+}
+
+.bottom-cards__item {
+    flex-basis: 360px;
 }
 
 .form__top-field-container {
@@ -332,24 +384,26 @@ header, footer {
     }
 }
 
-.about__awesome-team__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 90px;
+.slide-next-enter-active, .slide-prev-enter-active {
+    transition: opacity 1.2s, transform .8s ease-out;
 }
 
-.about__awesome-team__text {
-    max-width: 650px;
-    text-align: center;
+.slide-next-leave-active, .slide-prev-leave-active {
+    transition: opacity 1.2s;
 }
 
-.about__cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 358px);
-    grid-column-gap: 30px;
-    margin-top: 15px;
-    justify-content: space-between;
+.slide-next-enter {
+    /*transform: translateX(10%);*/
+    opacity: 0;
+}
+
+.slide-prev-enter {
+    /*transform: translateX(-10%);*/
+    opacity: 0;
+}
+
+.slide-next-leave-to, .slide-prev-leave-to {
+    opacity: 0;
 }
 
 .fade-enter-active, .fade-leave-active {

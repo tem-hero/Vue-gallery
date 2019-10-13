@@ -330,8 +330,4 @@ export default {
     cursor: pointer;
 }
 
-.gallery__image {
-    width: 100%;
-}
-
 </style>

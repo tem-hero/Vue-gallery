@@ -1,11 +1,28 @@
 <template>
-    <div>
-        <div v-for="skill of skills" :key="skill.id" class="about__skills__item">
-            <p>{{ skill.title }}</p>
-            <div class="skills__progress-container">
-                <div class="skills__progress-value" :style="{ width: skill.startValue + '%' }">
-                    <span class="skills__value-pseudo">{{ skill.currentValue }}%</span>
+    <div
+            class="about__skills__container"
+            :class="{ 'skills-opacity': !animationStarted }">
+        <div
+                v-for="skill of skills"
+                :key="skill.id"
+                class="about__skills__item">
+
+            <p class="about__skills__title text__regular-bold">{{ skill.title }}</p>
+
+            <div
+                    class="skills__progress-container"
+                    :class="{ 'skills-opacity': !animationStarted }">
+
+                <div
+                        class="skills__progress-value"
+                        :style="{ width: skill.startValue + '%' }"
+                        :class="{ 'skills-opacity': !animationStarted }"
+                >
+                    <span
+                            class="skills__value-pseudo"
+                    >{{ skill.currentValue }}%</span>
                 </div>
+
             </div>
         </div>
     </div>
@@ -52,7 +69,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.about__skills__container {
+    transition: opacity .2s;
+}
+
 .about__skills__item {
     margin-top: 30px;
 }
@@ -60,36 +81,43 @@ export default {
 .skills__progress-container {
     display: flex;
     width: 100%;
-    height: 15px;
+    height: 10px;
+    padding: 0 3px;
     align-items: center;
-    background-color: #f1f1f1;
+    background-color: #ebebeb;
+    transition: width 2.5s;
+}
+
+.skills-opacity {
+    opacity: 0;
+    width: 0;
 }
 
 .skills__progress-value {
     position: relative;
-    height: 5px;
-    background-color: black;
-    transition: width 5s ease;
-    /*animation: skillsAnimation 4s ease;*/
+    height: 2px;
+    background-color: #a1a1a1;
+    transition: width 5s, opacity 2s ease-out;
 }
 
 .skills__progress-value::after {
     content: '';
     position: absolute;
     right: -5px;
-    top: -3px;
-    width: 10px;
-    height: 10px;
+    top: -5px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    border: 2px solid grey;
+    border: 4px solid black;
     background-color: white;
 }
 
 .skills__value-pseudo {
     position: absolute;
-    right: -43px;
-    top: -45px;
-    padding: 3px 7px;
+    right: -39px;
+    top: -40px;
+    padding: 3px 9px;
+    font-size: 12px;
     background-color: black;
     color: white;
 }
@@ -97,23 +125,17 @@ export default {
 .skills__value-pseudo::before {
     content: '';
     position: absolute;
-    left: -6px;
-    bottom: -8px;
-    border: 10px solid transparent;
+    left: -3px;
+    bottom: -4px;
+    border: 5px solid transparent;
     border-top: 0;
     border-bottom-color: black;
     transform: rotate(-45deg);
 }
 
-/*@keyframes skillsAnimation {*/
-/*    from {width: 0}*/
-/*}*/
+.about__skills__title {
+    margin-bottom: 12px;
+    color: black;
+}
 
-/*.progression-enter-active {*/
-/*    transition: width 4s ease;*/
-/*}*/
-
-/*.progression-enter {*/
-/*    width: 0;*/
-/*}*/
 </style>

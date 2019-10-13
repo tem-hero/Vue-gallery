@@ -10,8 +10,8 @@
                     v-if="currentSlide === 0"
                     :key="0"
             >
-                <h1 class="heading-font"><span>lian creative agency</span></h1>
-                <p class="heading-font__add">minimal freelance portfolio</p>
+                <h1 class="heading-font font-lighter"><span>lian creative agency</span></h1>
+                <p class="heading-font__add font-lighter">minimal freelance portfolio</p>
             </div>
 
             <div
@@ -19,8 +19,8 @@
                     v-if="currentSlide === 1"
                     :key="1"
             >
-                <h1 class="heading-font"><span>we deliever quality results</span></h1>
-                <p class="heading-font__add">design & branding</p>
+                <h1 class="heading-font font-lighter"><span>we deliever quality results</span></h1>
+                <p class="heading-font__add font-lighter">design & branding</p>
             </div>
         </transition>
 
@@ -166,25 +166,4 @@
     background-color: #000000;
 }
 
-.slide-next-enter-active, .slide-prev-enter-active {
-    transition: opacity 1.2s, transform .8s ease-out;
-}
-
-.slide-next-leave-active, .slide-prev-leave-active {
-    transition: opacity 1.2s;
-}
-
-.slide-next-enter {
-    /*transform: translateX(10%);*/
-    opacity: 0;
-}
-
-.slide-prev-enter {
-    /*transform: translateX(-10%);*/
-    opacity: 0;
-}
-
-.slide-next-leave-to, .slide-prev-leave-to {
-    opacity: 0;
-}
 </style>

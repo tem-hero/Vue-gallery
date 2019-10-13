@@ -1,13 +1,19 @@
 <template>
-    <div class="about__cards">
-        <div v-for="card of cards" :key="card.id">
-            <div><img :src="require(`@/assets/${card.pic}`)" alt="CEO"></div>
+    <div class="bottom-cards">
+        <div
+                v-for="card of cards"
+                :key="card.id"
+                class="bottom-cards__item"
+        >
             <div>
+                <img class="gallery__image" :src="require(`@/assets/${card.pic}`)" alt="CEO">
+            </div>
+            <div class="about__card__info white-colored">
                 <dl>
-                    <dt>{{ card.name }}</dt>
-                    <dd>{{ card.position }}</dd>
+                    <dt class="about__card__dt font-lighter">{{ card.name }}</dt>
+                    <dd class="about__card__dd text__regular-bold">{{ card.position }}</dd>
                 </dl>
-                <p>{{ card.info }}</p>
+                <p class="text__common-p about__card__p">{{ card.info }}</p>
             </div>
         </div>
     </div>
@@ -32,5 +38,20 @@
 </script>
 
 <style>
+.about__card__info {
+    padding: 30px 35px 25px;
+}
 
+.about__card__dt {
+    font-size: 24px;
+    color: #041608;
+}
+
+.about__card__dd {
+    margin-top: 5px;
+}
+
+.about__card__p {
+    margin: 10px 0 0;
+}
 </style>
