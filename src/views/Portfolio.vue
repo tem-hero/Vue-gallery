@@ -1,6 +1,12 @@
 <template>
-    <div>
-<!--        <PageHeading></PageHeading>-->
+    <div class="portfolio-page">
+        <div class="top-heading-container_portfolio">
+            <div class="container_center top-heading">
+                <h1 class="heading-font font-lighter"><span>latest projects</span></h1>
+                <p class="heading-font__add heading-font__add-two font-lighter">we deliver quality</p>
+            </div>
+        </div>
+
         <nav class="white-colored">
             <div class="portfolio__nav-container container_center">
                 <a
@@ -16,18 +22,17 @@
 
                     >next</a>
                 <a
-                        href="#"
                         class="portfolio__menu-show-all"
                         @mouseenter="menuShow"
                         @mouseleave="menuHide"
 
-                    >show all
-                    <transition-group name="menu-show" tag="ul"
+                    >show all<transition-group
+
+                            name="menu-show" tag="ul"
                             @click.prevent.native="showProduct"
                             class="portfolio__dropdown"
                             @after-enter="menuShow"
                             @leave="menuHide"
-
                     >
                         <li
                                 v-for="item of menuShowedItems"
@@ -37,7 +42,8 @@
                         ><a
                                 href="#"
                                 :data-id="item.id"
-                                class="portfolio__dropdown__link">{{ item.name }}</a></li>
+                                class="portfolio__dropdown__link">{{ item.name }}</a>
+                        </li>
 
                     </transition-group></a>
             </div>
@@ -45,7 +51,8 @@
 
         <PortfolioProduct
                 :product="products[currentProduct]"
-                @related-click="setCurrentProduct($event % products.length)"></PortfolioProduct>
+                @related-click="setCurrentProduct($event % products.length)"
+        />
     </div>
 </template>
 
@@ -105,6 +112,14 @@ export default {
 </script>
 
 <style>
+.portfolio-page {
+    min-height: 1520px;
+}
+
+.top-heading-container_portfolio {
+    background: #e1e1e1 no-repeat url("../assets/porfolioHead.png") 93% 25%;
+}
+
 .portfolio__nav-container {
     display: flex;
 }
@@ -117,6 +132,7 @@ export default {
     padding: calc(36px - 1em) 0;
     border-right: 1px #ebebeb solid;
     border-left: 1px #ebebeb solid;
+    color: #000000;
 }
 
 .portfolio__prev-button {
@@ -127,6 +143,7 @@ export default {
     position: relative;
     margin-left: auto;
     width: 200px;
+    cursor: default;
 }
 
 .portfolio__prev-button:hover, .portfolio__next-button:hover,

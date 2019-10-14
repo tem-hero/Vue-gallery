@@ -108,8 +108,8 @@ export default {
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    border: 4px solid black;
-    background-color: white;
+    border: 4px solid #000000;
+    background-color: #ffffff;
 }
 
 .skills__value-pseudo {
@@ -118,8 +118,8 @@ export default {
     top: -40px;
     padding: 3px 9px;
     font-size: 12px;
-    background-color: black;
-    color: white;
+    background-color: #000000;
+    color: #ffffff;
 }
 
 .skills__value-pseudo::before {
@@ -129,13 +129,13 @@ export default {
     bottom: -4px;
     border: 5px solid transparent;
     border-top: 0;
-    border-bottom-color: black;
+    border-bottom-color: #000000;
     transform: rotate(-45deg);
 }
 
 .about__skills__title {
     margin-bottom: 12px;
-    color: black;
+    color: #000000;
 }
 
 </style>

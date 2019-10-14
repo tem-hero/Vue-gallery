@@ -1,50 +1,66 @@
 <template>
     <main class="container_center">
-        <transition name="prod-fade" @before-leave="hideRelated" @after-enter="unhideRelated" mode="out-in">
-            <section v-if="firstLayout" :key="1 + product.likes" class="portfolio__product-container">
+        <transition
+                name="prod-fade"
+                mode="out-in"
+                @before-leave="hideRelated"
+                @after-enter="unhideRelated"
+        >
+            <section
+                    v-if="firstLayout"
+                    :key="1 + product.likes"
+                    class="portfolio__product-container"
+            >
                 <PortfolioProductItem
-
                         :product="product"
-
-                ></PortfolioProductItem>
+                />
                 <PortfolioProductGallery
-
                         :images="product.images"
-
-                ></PortfolioProductGallery>
+                />
             </section>
-            <section v-else :key="3 + product.likes" class="portfolio__product-container">
+
+            <section
+                    v-else
+                    :key="3 + product.likes"
+                    class="portfolio__product-container"
+            >
                 <PortfolioProductGallery
-
                         :images="product.images"
-
-                ></PortfolioProductGallery>
+                />
                 <PortfolioProductItem
-
                         :product="product"
-
-                ></PortfolioProductItem>
+                />
             </section>
         </transition>
 
         <transition name="related-fade">
-            <section v-show="relatedVisible" class="about__awesome-team__container">
-                <h2>related works</h2>
-                <p class="about__awesome-team__text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+            <section
+                    v-show="relatedVisible"
+                    class="text__cards__container"
+            >
+                <h2 class="text__cards-title font-lighter">related works</h2>
+
+                <p class="text__common-p text__cards-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
                     nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
             </section>
         </transition>
 
         <transition name="related-fade">
-            <div v-show="relatedVisible" class="about__cards portfolio__related-works">
+            <div
+                    v-show="relatedVisible"
+                    class="bottom-cards"
+            >
                 <div
                         v-for="(prod, index) of relatedProducts"
                         :key="index"
-                        @click="$emit('related-click', prod.id)">
+                        @click="$emit('related-click', prod.id)"
+                        class="bottom-cards__item portfolio__related-works"
+                >
                     <img
                             :src="require(`@/assets/${prod.img}`)"
                             alt="Product"
-                            class="portfolio__related-works__img">
+                            class="portfolio__related-works__img gallery__image"
+                    >
                 </div>
             </div>
         </transition>
@@ -102,9 +118,8 @@ export default {
 
 <style>
 .portfolio__product-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 40px;
+    display: flex;
+    justify-content: space-between;
     margin-top: 60px;
 }
 
@@ -114,7 +129,6 @@ export default {
 }
 
 .portfolio__related-works__img {
-    width: 100%;
     object-fit: cover;
     cursor: pointer;
 }

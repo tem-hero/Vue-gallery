@@ -1,6 +1,6 @@
 <template>
-    <div class="about">
-        <div class="top-heading-container">
+    <div>
+        <div class="top-heading-container_about">
             <div class="container_center top-heading">
                 <h1 class="heading-font font-lighter"><span>about the agency</span></h1>
                 <p class="heading-font__add heading-font__add-two font-lighter">welcome to lian</p>
@@ -82,20 +82,13 @@ export default {
 </script>
 
 <style>
-.top-heading-container {
+.top-heading-container_about {
     background: #f0f0f2 no-repeat url("../assets/about_head.png") right 36%;
-}
-
-.top-heading {
-    display: flex;
-    height: 350px;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .about__our-story {
     display: flex;
-    min-height: 635px;
+    max-height: 600px;
     margin-top: 72px;
     justify-content: space-between;
 }

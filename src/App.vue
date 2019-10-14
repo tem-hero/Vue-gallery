@@ -135,7 +135,7 @@ header, footer {
 }
 
 .white-colored {
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .gallery__image {
@@ -194,7 +194,7 @@ header, footer {
 
 .header__nav__link:hover, .page-current-link,
 .current-link {
-    color: #000;
+    color: #000000;
 }
 
 .page-current-link::before {
@@ -206,6 +206,13 @@ header, footer {
     border-bottom: 1px #06060a solid;
     margin-left: -29px;
     margin-top: 6px;
+}
+
+.top-heading {
+    display: flex;
+    height: 350px;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .heading-font {
@@ -238,7 +245,6 @@ header, footer {
     margin: 30px 0;
     line-height: 2;
     text-transform: initial;
-    color: #777;
 }
 
 .text__regular-bold {
@@ -251,16 +257,17 @@ header, footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 90px;
 }
 
 .text__cards-title {
     font-size: 30px;
     letter-spacing: 0.65rem;
+    color: #000000;
 }
 
 .text__cards-text {
-    max-width: 650px;
+    max-width: 564px;
     text-align: center;
 }
 
