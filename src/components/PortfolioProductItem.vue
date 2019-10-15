@@ -12,7 +12,7 @@
                         :datetime="product.date"
 
                 >{{ setDate(product.date) }}</time>
-                <span>{{ product.likes }} likes</span>
+                <LikeButton><template>{{ product.likes }} likes</template></LikeButton>
             </p>
 
             <p class="product__main-text text__common-p">{{ product.info }}</p>
@@ -31,11 +31,15 @@
 
 <script>
 import setDate from '@/components/setDate.vue'
+import LikeButton from '@/components/LikeButton.vue'
 
 export default {
     name: "PortfolioProductItem",
     props: ['product'],
     mixins: [setDate],
+    components: {
+        LikeButton
+    },
     methods: {
         makeStringFromArr(arr) {
             return arr.join(', ');

@@ -1,6 +1,7 @@
 <template>
     <div
             class="about__skills__container"
+            ref="skills"
             :class="{ 'skills-opacity': !animationStarted }">
         <div
                 v-for="skill of skills"
@@ -29,11 +30,6 @@
 </template>
 
 <script>
-function scrollEventFunction() {
-    if (this.animationStarted) return;
-    if (pageYOffset > 230) this.startAnimation();
-}
-
 export default {
     name: "AboutSkills",
     data() {
@@ -48,23 +44,36 @@ export default {
         }
     },
     methods: {
+        checkView() {
+            if (this.animationStarted) return;
+            if (this.$route.path !== 'about') {
+                window.removeEventListener('scroll', this.checkView);
+                return;
+            }
+
+            let scrollY = pageYOffset;
+            let currentScroll = document.documentElement.clientHeight + scrollY;
+            let elementPosition = this.$refs.skills.getBoundingClientRect().bottom + scrollY;
+
+            if (currentScroll > elementPosition) this.startAnimation();
+        },
+        startAnimation() {
+            this.animationStarted = true;
+
+            this.skills.forEach((item, index) => {
+                item.startValue = item.value;
+                this.animateNumbers(index);
+            });
+        },
         animateNumbers(index) {
             if (this.skills[index].currentValue < this.skills[index].value) {
                 this.skills[index].currentValue++;
                 setTimeout(this.animateNumbers, Math.round(5000 / this.skills[index].value), index);
             }
-        },
-        startAnimation() {
-            this.animationStarted = true;
-            window.removeEventListener('scroll', scrollEventFunction);
-            this.skills.forEach((item, index) => {
-                item.startValue = item.value;
-                this.animateNumbers(index);
-            });
         }
     },
     mounted() {
-        window.addEventListener('scroll', scrollEventFunction.bind(this));
+        window.addEventListener('scroll', this.checkView);
     }
 }
 </script>

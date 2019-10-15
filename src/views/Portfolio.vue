@@ -26,11 +26,13 @@
                         @mouseenter="menuShow"
                         @mouseleave="menuHide"
 
-                    >show all<transition-group
+                    ><i class="fas fa-bars"></i>show all<transition-group
 
-                            name="menu-show" tag="ul"
+                            name="menu-show"
+                            tag="ul"
                             @click.prevent.native="showProduct"
                             class="portfolio__dropdown"
+                            :class="menuShadow"
                             @after-enter="menuShow"
                             @leave="menuHide"
                     >
@@ -85,6 +87,14 @@ export default {
             menuShowed: false
         }
     },
+    computed: {
+        menuShadow() {
+            return {
+                'portfolio__menu-show-all_shadow': this.menuShowed,
+                'portfolio__dropdown-pseudo': this.menuShowed
+            }
+        }
+    },
     components: {
         PortfolioProduct
     },
@@ -98,11 +108,13 @@ export default {
             this.menuHide();
         },
         menuShow() {
+            this.menuShowed = true;
             if (this.menuShowedItems.length < this.menuItems.length) {
                 this.menuShowedItems.push(this.menuItems[this.menuShowedItems.length]);
             }
         },
         menuHide() {
+            this.menuShowed = false;
             if (this.menuShowedItems.length > 0) {
                 this.menuShowedItems.pop();
             }
@@ -127,9 +139,9 @@ export default {
 .portfolio__prev-button, .portfolio__next-button,
 .portfolio__menu-show-all {
     display: inline-block;
-    width: 130px;
+    width: 164px;
     text-align: center;
-    padding: calc(36px - 1em) 0;
+    padding: calc(36px - 0.9rem) 0;
     border-right: 1px #ebebeb solid;
     border-left: 1px #ebebeb solid;
     color: #000000;
@@ -142,8 +154,12 @@ export default {
 .portfolio__menu-show-all {
     position: relative;
     margin-left: auto;
-    width: 200px;
+    width: 196px;
     cursor: default;
+}
+
+.fas.fa-bars {
+    margin-right: 6px;
 }
 
 .portfolio__prev-button:hover, .portfolio__next-button:hover,
@@ -159,28 +175,40 @@ export default {
     top: -2px;
     width: 5px;
     height: 5px;
-    border-left: 1px #6d6666 solid;
-    border-top: 1px #6d6666 solid;
+    border-left: 1px #000000 solid;
+    border-top: 1px #000000 solid;
 }
 
 .portfolio__prev-button::before {
-    margin-right: 4px;
+    margin-right: 12px;
     transform: rotate(-45deg);
 }
 
 .portfolio__next-button::after {
-    margin-left: 4px;
+    margin-left: 12px;
     transform: rotate(135deg);
-}
-
-.portfolio__menu-show-all::before {
 }
 
 .portfolio__dropdown {
     position: absolute;
     top: 60px;
     left: -1px;
-    width: 200px;
+    width: 198px;
+}
+
+.portfolio__menu-show-all_shadow {
+    box-shadow: 0 4px 14px 1px rgba(0, 0, 0, 0.05);
+}
+
+.portfolio__menu-show-all_shadow::before {
+    content: "";
+    height: 18px;
+    width: 196px;
+    position: absolute;
+    top: -18px;
+    left: 1px;
+    background-color: #fafafa;
+    z-index: 2;
 }
 
 .portfolio__dropdown__item {
@@ -195,7 +223,7 @@ export default {
 .portfolio__dropdown__link {
     display: inline-block;
     width: 100%;
-    padding: calc(26px - 1em) 0;
+    padding: calc(26px - 0.9rem) 0;
 }
 
 .menu-show-enter-active, .menu-show-leave-active {

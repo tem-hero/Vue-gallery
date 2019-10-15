@@ -107,7 +107,7 @@ a {
 
 header {
     height: 90px;
-    box-shadow: 0 3px 5px 1px rgba(0,0,0,0.25);
+    box-shadow: 0 1px 5px 1px rgba(0,0,0,0.25);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,7 +115,7 @@ header {
 
 footer {
     height: 200px;
-    box-shadow: 0 -1px 6px 1px rgba(0,0,0,0.25);
+    box-shadow: 0 -1px 6px 1px rgba(0,0,0,0.05);
 }
 
 header, footer {
