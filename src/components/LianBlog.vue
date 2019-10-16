@@ -1,29 +1,47 @@
 <template>
     <main class="blog-section">
-        <transition-group name="gal-images" tag="div" class="blog__row">
+
+        <transition-group
+                name="gal-images"
+                tag="div"
+                class="blog__row"
+        >
             <BlogPost
-                v-for="post of rows[0]"
-                :key="post.id"
-                :post="post"
-                v-on="$listeners"
-            ></BlogPost>
+                    v-for="post of rows[0]"
+                    :key="post.id"
+                    :post="post"
+                    v-on="$listeners"
+            />
         </transition-group>
-        <transition-group name="gal-images" tag="div" class="blog__row">
+        <transition-group
+                name="gal-images"
+                tag="div"
+                class="blog__row"
+        >
             <BlogPost
-                v-for="post of rows[1]"
-                :key="post.id"
-                :post="post"
-                v-on="$listeners"
-            ></BlogPost>
+                    v-for="post of rows[1]"
+                    :key="post.id"
+                    :post="post"
+                    v-on="$listeners"
+            />
         </transition-group>
-        <div class="load-button-container load-button-container__grid-center">
+        <div
+                class="load-button-container load-button-container__grid-center"
+                @click.prevent="loadPosts"
+        >
             <transition name="gal-button">
-                <div class="load-button"
-                     @click.prevent="loadPosts"
-                     v-if="showButton" key="button"><a href="#">load moar</a>
+                <div
+                        v-if="showButton"
+                        key="button"
+                        class="load-button"
+
+                    ><a href="#">load moar</a>
                 </div>
-                <div class="lds-facebook"
-                     v-else key="loader"><div></div><div></div><div></div></div>
+                <div
+                        v-else
+                        key="loader"
+                        class="lds-facebook"
+                ><div></div><div></div><div></div></div>
             </transition>
         </div>
     </main>
@@ -53,7 +71,7 @@ export default {
     data() {
         return {
             allPosts: [
-                {id: 1, title: 'I am a Blog Post Title', author: 'Jenn Pereira', date: '2016-07-19', wordpress: true,
+                {id: 1, title: 'I am a Blog Post Title', author: 'Jenn Pereira', date: '2016-07-19', blackSpanText: 'wordpress',
                 content: 'Phasellus et nisl tellus. Etiam facilisis eu nisi scelerisque faucibus. Proin semper suscipit magna, nec imperdiet lacus semper vitae. Sed hendrerit enim non justo posuere placerat eget purus mauris. Etiam facilisis eu nisi scelerisque faucibus...'},
                 {id: 2, title: 'I am a Blog Post with an Awesome Image', author: 'Jenn Pereira', date: '2016-07-19', image: true, imgSrc: 'blog-image1.png',
                 content: 'Proin semper suscipit magna, nec imperdiet lacus semper vitae. Sed hendrerit enim non justo posuere placerat eget purus mauris...'},
@@ -61,7 +79,7 @@ export default {
                 content: 'Proin semper suscipit magna, nec imperdiet lacus semper vitae. Sed hendrerit enim non justo posuere placerat eget purus mauris...'},
                 {id: 4, title: 'I am a Blog Post with an awesome Image', author: 'Jenn Pereira', date: '2016-07-19', image: true, imgSrc: 'blog-image2.png',
                 content: 'Proin semper suscipit magna, nec imperdiet lacus semper vitae. Sed hendrerit enim non justo posuere placerat eget purus mauris...'},
-                {id: 5, title: 'I am a Blog Post Title', author: 'Jenn Pereira', date: '2016-07-19',
+                {id: 5, title: 'I am a Blog Post Title', author: 'Jenn Pereira', date: '2016-07-19', blackSpanText: 'image hover', imageHover: true, imgSrc: 'blog-image4.png',
                 content: 'Phasellus et nisl tellus. Etiam facilisis eu nisi scelerisque faucibus. Proin semper suscipit magna, nec imperdiet lacus semper...'}
             ],
             rows: [
@@ -98,14 +116,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .blog-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));;
+    position: relative;
+    display: flex;
+    flex-basis: 750px;
+    margin-bottom: 100px;
+    justify-content: space-between;
+}
+
+.blog__row {
+    flex-basis: 360px;
 }
 
 .load-button-container__grid-center {
-    grid-column: 1 / 3;
+    position: absolute;
+    bottom: -105px;
+    left: calc(50% - 62px);
+    width: 124px;
 }
 
 </style>

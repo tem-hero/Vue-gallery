@@ -1,45 +1,28 @@
 <template>
     <div>
-        <span class="heading-font__add blog__aside-head">recent posts</span>
+        <span class="heading-font__add blog__aside-head font-lighter">recent posts</span>
         <div class="recent-posts-container white-colored">
-            <div v-for="post of recentPosts" :key="post.id" class="recent-posts__post">
-                <div><img :src="require(`@/assets/${post.imgSrc}`)" alt="Side image"></div>
-                <div>
-                    <p>{{ post.title }}</p>
-                    <time :datetime="post.date">{{ setDate(post.date) }}</time>
+
+            <div
+                    v-for="post of recentPosts"
+                    :key="post.id"
+                    class="recent-posts__post text__regular-bold"
+            >
+                <div class="recent-posts__img"><img
+                        :src="require(`@/assets/${post.imgSrc}`)"
+                        class="gallery__image"
+                        alt="Side image"
+                ></div>
+                <div class="recent-posts__text-row">
+                    <p class="recent-posts__text-p">{{ post.title }}</p>
+                    <time
+                            :datetime="post.date"
+                            class="recent-posts__text-date font-lighter"
+
+                    >{{ setDate(post.date) }}</time>
                 </div>
             </div>
         </div>
-        <!--<div class="side-post">
-            <div>
-                <div><img src="files/sidebar1.png" alt="Side"></div>
-                <div class="side-textbox">
-                    <p>Lorem ipsum dolor sit amet, consec</p>
-                    <time datetime="05-07-2016">July 5, 2016</time>
-                </div>
-            </div>
-            <div>
-                <div><img src="files/sidebar2.png" alt="Side"></div>
-                <div class="side-textbox">
-                    <p>Ut wisi enim ad minim veniam, quis</p>
-                    <time datetime="17-07-2016">July 17, 2016</time>
-                </div>
-            </div>
-            <div>
-                <div><img src="files/sidebar3.png" alt="Side"></div>
-                <div class="side-textbox">
-                    <p>Aliquip ex ea commodo aliquam erat volutpat</p>
-                    <time datetime="21-07-2016">July 21, 2016</time>
-                </div>
-            </div>
-            <div>
-                <div><img src="files/sidebar4.png" alt="Side"></div>
-                <div class="side-textbox">
-                    <p>Ut wisi enim ad minim veniam, quis</p>
-                    <time datetime="17-07-2016">July 17, 2016</time>
-                </div>
-            </div>
-        </div>-->
     </div>
 </template>
 
@@ -62,21 +45,33 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .recent-posts-container {
     box-sizing: border-box;
     padding: 7px 27px 27px;
 }
 
 .recent-posts__post {
-    display: grid;
-    grid-template-columns: 90px auto;
-    grid-column-gap: 15px;
+    display: flex;
     margin-top: 20px;
+    justify-content: space-between;
 }
 
-.recent-posts__post p {
-    margin-bottom: 11px;
+.recent-posts__img {
+    flex-basis: 90px;
 }
 
+.recent-posts__text-row {
+    flex-basis: 202px;
+}
+
+.recent-posts__text-p {
+    margin-bottom: 8px;
+    color: #3d3d3d;
+    cursor: pointer;
+}
+
+.recent-posts__text-date {
+    font-size: 13px;
+}
 </style>

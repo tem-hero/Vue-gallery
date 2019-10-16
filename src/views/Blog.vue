@@ -1,18 +1,21 @@
 <template>
     <div class="blog">
-        <router-view
-                v-if="modalPostShow"
-                @close-post="closeModal"/>
-
-        <!--        <PageHeading></PageHeading>-->
+        <transition name="modal">
+            <router-view
+                    v-if="modalPostShow"
+                    @close-post="closeModal"
+            />
+        </transition>
+        <div class="top-heading-container_blog">
+            <div class="container_center top-heading">
+                <h1 class="heading-font font-lighter"><span>news about lian</span></h1>
+                <p class="heading-font__add heading-font__add-two font-lighter">latest news & insights</p>
+            </div>
+        </div>
 
         <div class="blog-container container_center">
-            <LianBlog
-                    @open-post="showModal"
-                    class="posts-section"
-            ></LianBlog>
-
-            <BlogSidebar></BlogSidebar>
+            <LianBlog @open-post="showModal"/>
+            <BlogSidebar/>
         </div>
     </div>
 </template>
@@ -46,22 +49,25 @@ export default {
 </script>
 
 <style>
+.top-heading-container_blog {
+    background: #f6f6f8 no-repeat url("../assets/blog_heading.png") 60% 47%;
+}
+
 .blog {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 .blog-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-    grid-column-gap: 30px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.posts-section {
-    grid-column: 1 / 3;
-    grid-column-gap: 30px;
+.modal-enter-active, .modal-leave-active {
+    transition: opacity .4s, transform .1s;
 }
 
-/*.blog__single-post-view {
-    position: absolute;
-}*/
+.modal-enter, .modal-leave-to {
+    opacity: 0;
+    transform: scale(0.95, 0.98);
+}
 </style>

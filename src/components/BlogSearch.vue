@@ -3,7 +3,7 @@
         <label>
             <input type="search" placeholder="Search" class="blog__search__input-item">
         </label>
-        <button type="submit" class="blog__search__button-item"></button>
+        <button type="submit" class="blog__search__button-item"><i class="fas fa-search"></i></button>
     </form>
 </template>
 
@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .blog__search {
     position: relative;
     margin-top: 30px;
@@ -42,10 +42,15 @@ export default {
     cursor: pointer;
 }
 
-.blog__search__button-item:before {
-    content: "\f002";
-    font-family: FontAwesome;
+.fas.fa-search {
     font-size: 16px;
     color: #ffffff;
 }
+
+/*input.blog__search__input-item[type="search"]::-webkit-search-decoration,
+input.blog__search__input-item[type="search"]::-webkit-search-cancel-button,
+input.blog__search__input-item[type="search"]::-webkit-search-results-button,
+input.blog__search__input-item[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}*/
 </style>

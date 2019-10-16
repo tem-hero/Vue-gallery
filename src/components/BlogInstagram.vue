@@ -1,8 +1,15 @@
 <template>
     <div>
-        <span class="heading-font__add blog__aside-head">instagram</span>
-        <div class="instagram white-colored">
-            <div v-for="item of instaImages" :key="item.id"><img :src="require(`@/assets/${item.imgSrc}`)" alt="Instagram picture"></div>
+        <span class="heading-font__add blog__aside-head font-lighter">instagram</span>
+        <div class="instagram-container white-colored">
+            <div
+                    v-for="item of instaImages"
+                    :key="item.id"
+                    class="instagram__item"
+            ><img
+                    :src="require(`@/assets/${item.imgSrc}`)"
+                    alt="Instagram picture"
+            ></div>
         </div>
     </div>
 </template>
@@ -28,12 +35,16 @@ export default {
 }
 </script>
 
-<style scoped>
-.instagram {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 80px);
-    grid-gap: 5px;
+<style>
+.instagram-container {
+    display: flex;
+    flex-wrap: wrap;
     padding: 25px;
+    justify-content: space-between;
 }
+
+.instagram__item {
+    flex-basis: 100px;
+}
+
 </style>

@@ -133,18 +133,6 @@ export default {
     cursor: pointer;
 }
 
-.prod-fade-enter-active, .prod-fade-leave-active {
-    transition: opacity .3s linear;
-}
-
-.prod-fade-enter, .prod-fade-leave-to {
-    opacity: 0;
-}
-
-.related-fade-leave-active {
-    /*transition: opacity .1s linear;*/
-}
-
 .related-fade-enter-active {
     transition: opacity .7s linear;
 }

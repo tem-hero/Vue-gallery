@@ -244,6 +244,7 @@ header, footer {
 .text__common-p {
     margin: 30px 0;
     line-height: 2;
+    font-weight: normal;
     text-transform: initial;
 }
 
@@ -251,6 +252,14 @@ header, footer {
     font-size: 16px;
     font-weight: bold;
     text-transform: initial;
+}
+
+.black-span {
+    display: inline-block;
+    font-size: 13px;
+    padding: 6px 17px;
+    color: #ffffff;
+    background-color: #000000;
 }
 
 .text__cards__container {
@@ -436,5 +445,13 @@ header, footer {
 
 .gal-button-enter-active {
     transition: opacity .5s;
+}
+
+.prod-fade-enter-active, .prod-fade-leave-active {
+    transition: opacity .3s linear;
+}
+
+.prod-fade-enter, .prod-fade-leave-to {
+    opacity: 0;
 }
 </style>

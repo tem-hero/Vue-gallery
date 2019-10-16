@@ -60,12 +60,20 @@
         </div>
         <div class="load-button-container">
             <transition name="gal-button">
-                <div class="load-button"
-                     @click.prevent="loadMemes"
-                     v-if="showButton" key="button"><a href="#">load moar</a>
+                <div
+                        v-if="showButton"
+                        key="button"
+                        class="load-button"
+                        @click.prevent="loadMemes"
+
+                ><a href="#">load moar</a>
                 </div>
-                <div class="lds-facebook"
-                     v-else key="loader"><div></div><div></div><div></div></div>
+                <div
+                        v-else
+                        key="loader"
+                        class="lds-facebook"
+
+                ><div></div><div></div><div></div></div>
             </transition>
         </div>
         <ModalWindow

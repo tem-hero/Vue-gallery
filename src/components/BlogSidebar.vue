@@ -1,9 +1,9 @@
 <template>
-    <aside>
-        <BlogSearch></BlogSearch>
-        <BlogRecentPosts></BlogRecentPosts>
-        <BlogPopTags></BlogPopTags>
-        <BlogInstagram></BlogInstagram>
+    <aside class="blog__aside">
+        <BlogSearch/>
+        <BlogRecentPosts/>
+        <BlogPopTags/>
+        <BlogInstagram/>
     </aside>
 </template>
 
@@ -25,6 +25,10 @@ export default {
 </script>
 
 <style>
+.blog__aside {
+    flex-basis: 360px;
+}
+
 .blog__aside-head {
     display: block;
     position: relative;
@@ -45,8 +49,4 @@ export default {
     border-width: 7px;
     margin-left: -7px;
 }
-</style>
-
-<style scoped>
-
 </style>
