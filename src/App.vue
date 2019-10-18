@@ -215,6 +215,10 @@ header, footer {
     justify-content: center;
 }
 
+.top-heading-container_about {
+    background: #f0f0f2 no-repeat url("./assets/about_head.png") right 36%;
+}
+
 .heading-font {
     font-size: 48px;
     color: white;
@@ -228,7 +232,7 @@ header, footer {
 
 .heading-font__add {
     font-size: 18px;
-    color: black;
+    color: #000000;
     letter-spacing: 0.5rem;
     margin-top: 15px;
 }
@@ -338,10 +342,15 @@ header, footer {
     text-transform: inherit;
     font-family: inherit;
     font-weight: 500;
-    color: white;
-    background-color: black;
+    color: #ffffff;
+    background-color: #000000;
+    transition: background-color .12s;
     border: none;
     letter-spacing: 0.1em;
+}
+
+.form__submit-button:hover {
+    background-color: rgba(41, 41, 41, 0.89);
 }
 
 .load-button-container {

@@ -82,10 +82,6 @@ export default {
 </script>
 
 <style>
-.top-heading-container_about {
-    background: #f0f0f2 no-repeat url("../assets/about_head.png") right 36%;
-}
-
 .about__our-story {
     display: flex;
     max-height: 600px;
