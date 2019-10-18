@@ -83,12 +83,6 @@ export default {
     line-height: 2.25;
 }
 
-.product__tags-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333333;
-}
-
 .product__tags {
     font-size: 16px;
     text-transform: initial;

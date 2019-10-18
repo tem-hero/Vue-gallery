@@ -280,6 +280,12 @@ header, footer {
     text-align: center;
 }
 
+.product__tags-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+}
+
 .bottom-cards {
     display: flex;
     margin-top: 15px;
