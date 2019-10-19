@@ -17,6 +17,7 @@
 
                     >{{ link.name }}</router-link>
                     </li>
+                    <HeaderSearch/>
                 </ul>
             </div>
         </header>
@@ -33,6 +34,8 @@
 </template>
 
 <script>
+import HeaderSearch from '@/components/HeaderSearch.vue'
+
 export default {
     data() {
         return {
@@ -46,6 +49,9 @@ export default {
             currentLink: '',
             modalIsShowed: false
         }
+    },
+    components: {
+        HeaderSearch
     },
     methods: {
         fixBodyOn() {
@@ -189,7 +195,7 @@ header, footer {
 }
 
 .header__nav__list__item {
-    margin-left: 40px;
+    margin-left: 45px;
 }
 
 .header__nav__link:hover, .page-current-link,
@@ -204,7 +210,7 @@ header, footer {
     height: 1px;
     display: block;
     border-bottom: 1px #06060a solid;
-    margin-left: -29px;
+    margin-left: -30px;
     margin-top: 6px;
 }
 
