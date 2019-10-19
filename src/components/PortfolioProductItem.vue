@@ -53,40 +53,4 @@ export default {
     flex-basis: 550px;
 }
 
-.product__title {
-    font-size: 30px;
-    font-weight: normal;
-    letter-spacing: 0.28rem;
-    color: #000000;
-}
-
-.product__subtitle {
-    margin-top: 7px;
-    color: #555555;
-}
-
-.portfolio__line {
-    margin: 30px 0;
-    color: #cccccc;
-}
-
-.product__body {
-    text-transform: initial;
-}
-
-.product__date {
-    font-weight: bold;
-    color: #555555;
-}
-
-.product__main-text {
-    line-height: 2.25;
-}
-
-.product__tags {
-    font-size: 16px;
-    text-transform: initial;
-    margin: 10px 0;
-    color: #999999;
-}
 </style>

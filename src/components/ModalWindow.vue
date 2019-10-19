@@ -1,25 +1,39 @@
 <template>
     <transition name="modal-fade">
-        <div class="modal__backdrop modal__backdrop__gallery"
-             @click.prevent="close">
+        <div
+                class="modal__backdrop modal__backdrop__gallery"
+                @click.prevent="close"
+        >
             <div class="modal__gallery modal">
-                <div @click.stop="$emit('prev-img')" class="modal-button modal-prev"><span>&#10094;</span></div>
+                <div
+                        class="modal-button modal-prev"
+                        @click.stop="$emit('prev-img')"
+
+                ><span>&#10094;</span></div>
 
                 <transition name="fade" mode="out-in">
-                    <div :key="modalId" class="modal__image-wrapper">
-                        <slot name="image">
-                        </slot>
+                    <div
+                            :key="modalId"
+                            class="modal__image-wrapper"
+                    >
+                        <slot name="image"></slot>
                     </div>
                 </transition>
 
                 <transition name="fade" mode="out-in">
-                    <div :key="modalId" class="modal__post-wrapper">
-                        <slot name="post">
-                        </slot>
+                    <div
+                            :key="modalId"
+                            class="modal__post-wrapper"
+                    >
+                        <slot name="post"></slot>
                     </div>
                 </transition>
 
-                <div @click.stop="$emit('next-img')" class="modal-button modal-next"><span>&#10095;</span></div>
+                <div
+                        class="modal-button modal-next"
+                        @click.stop="$emit('next-img')"
+
+                ><span>&#10095;</span></div>
             </div>
         </div>
     </transition>
@@ -48,29 +62,30 @@ export default {
 
 .modal__gallery {
     display: flex;
-    flex-flow: row wrap;
-    max-width: 800px;
-    min-height: 460px;
-    justify-content: center;
+    flex-basis: 950px;
+    height: 450px;
+    padding: 30px;
+    justify-content: space-between;
     box-shadow: 2px 2px 20px 1px;
     background-color: #FFFFFF;
 }
 
 .modal__image-wrapper {
     display: flex;
-    max-width: 360px;
+    flex-basis: 360px;
     align-items: center;
 }
 
 .modal__post-wrapper {
     display: flex;
-    max-width: 400px;
+    flex-basis: 550px;
     flex-direction: column;
     justify-content: center;
 }
 
 .modal-button {
     position: absolute;
+    top: 0;
     display: flex;
     width: 30px;
     height: 100%;

@@ -46,7 +46,7 @@ export default {
     methods: {
         checkView() {
             if (this.animationStarted) return;
-            if (this.$route.path !== 'about') {
+            if (this.$route.path !== '/about') {
                 window.removeEventListener('scroll', this.checkView);
                 return;
             }

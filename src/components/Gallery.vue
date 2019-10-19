@@ -4,19 +4,23 @@
                 class="gallery__nav"
                 @click.prevent="filterImages"
         >
-            <li v-for="link of galleryNav" :key="link.id" class="gallery__nav__link">
+            <li
+                    v-for="link of galleryNav"
+                    :key="link.id"
+                    class="gallery__nav__link"
+            >
                 <a
                         href="#"
                         :data-tag="link.tag"
                         class="header__nav__link"
-                        :class="{'current-link': link.tag === currentTag}">
-                    {{ link.name }}
-                </a>
+                        :class="{'current-link': link.tag === currentTag}"
+
+                >{{ link.name }}</a>
             </li>
         </ul>
         <div
-                @click="showModal"
                 class="gallery"
+                @click="showModal"
         >
             <transition-group name="gal-images" tag="div" class="gallery__row">
                 <div
@@ -25,11 +29,12 @@
                         class="gallery__item"
 
                     ><img
-                        :src="getImgUrl(img.src)"
-                        :data-id="img.id"
-                        @load="calculateRowHeight"
-                        alt="Item"
-                        class="gallery__image"></div>
+                            :src="getImgUrl(img.src)"
+                            :data-id="img.id"
+                            alt="Item"
+                            class="gallery__image"
+                            @load="calculateRowHeight"
+                    ></div>
             </transition-group>
             <transition-group name="gal-images" tag="div" class="gallery__row">
                 <div
@@ -38,11 +43,12 @@
                         class="gallery__item"
 
                     ><img
-                        :src="getImgUrl(img.src)"
-                        :data-id="img.id"
-                        @load="calculateRowHeight"
-                        alt="Item"
-                        class="gallery__image"></div>
+                            :src="getImgUrl(img.src)"
+                            :data-id="img.id"
+                            alt="Item"
+                            class="gallery__image"
+                            @load="calculateRowHeight"
+                    ></div>
             </transition-group>
             <transition-group name="gal-images" tag="div" class="gallery__row">
                 <div
@@ -51,13 +57,15 @@
                         class="gallery__item"
 
                     ><img
-                        :src="getImgUrl(img.src)"
-                        :data-id="img.id"
-                        @load="calculateRowHeight"
-                        alt="Item"
-                        class="gallery__image"></div>
+                            :src="getImgUrl(img.src)"
+                            :data-id="img.id"
+                            alt="Item"
+                            class="gallery__image"
+                            @load="calculateRowHeight"
+                    ></div>
             </transition-group>
         </div>
+
         <div class="load-button-container">
             <transition name="gal-button">
                 <div
@@ -76,13 +84,14 @@
                 ><div></div><div></div><div></div></div>
             </transition>
         </div>
+
         <ModalWindow
                 :modalId="modalData.id"
                 v-show="modalData.isVisible"
                 @close="closeModal"
                 @prev-img="modalPrev"
-                @next-img="modalNext">
-
+                @next-img="modalNext"
+        >
             <template v-slot:image><img
 
                     :src="getImgUrl(modalImg)"
@@ -91,20 +100,22 @@
             ></template>
 
             <template v-slot:post>
-                <h2>{{ itemInfo[modalData.id % 2].title }}</h2>
-                <p>{{ itemInfo[modalData.id % 2].subtitle }}</p>
+
+                <h2 class="product__title">{{ itemInfo[modalData.id % 2].title }}</h2>
+                <p class="product__subtitle text__regular-bold">{{ itemInfo[modalData.id % 2].subtitle }}</p>
                 <hr class="portfolio__line">
 
-                <article class="portfolio-article">
-                    <p class="article-date">
+                <article class="product__body">
+                    <p class="product__date">
                         <time
-                                :datetime="itemInfo[modalData.id % 2].date">
-                            {{ setDate(itemInfo[modalData.id % 2].date) }}
-                        </time>
+                                :datetime="itemInfo[modalData.id % 2].date"
 
-                        <span>{{ itemInfo[modalData.id % 2].likes }} likes</span>
+                        >{{ setDate(itemInfo[modalData.id % 2].date) }}</time>
+
+                        <LikeButton><template>{{ itemInfo[modalData.id % 2].likes }} likes</template></LikeButton>
                     </p>
-                    <p>{{ itemInfo[modalData.id % 2].info }}</p>
+
+                    <p class="product__main-text text__common-p">{{ itemInfo[modalData.id % 2].info }}</p>
                 </article>
             </template>
         </ModalWindow>
@@ -115,6 +126,7 @@
 import getRandomIntInclusive from '@/components/getRandomIntInclusive'
 import ModalWindow from '@/components/ModalWindow.vue'
 import setDate from '@/components/setDate.vue'
+import LikeButton from '@/components/LikeButton.vue'
 
 function ImageObj(url, ctx) {
     this.src = url;
@@ -142,7 +154,8 @@ function smallestValue(arr) {
 export default {
     name: "Gallery",
     components: {
-        ModalWindow
+        ModalWindow,
+        LikeButton
     },
     mixins: [setDate],
     data() {
@@ -295,7 +308,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .gallery__nav {
     display: flex;
     justify-content: center;
