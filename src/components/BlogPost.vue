@@ -28,7 +28,7 @@
             <router-link to="/blog/post">
                 <h2
                         class="blog__post__title"
-                        @click="$emit('open-post')"
+                        @click="showPost"
 
                 >{{ post.title }}</h2>
             </router-link>
@@ -37,7 +37,7 @@
             <router-link to="/blog/post">
                 <p
                         class="blog__post__content text__common-p"
-                        @click="$emit('open-post')"
+                        @click="showPost"
 
                 >{{ post.content }}</p>
             </router-link>
@@ -63,6 +63,12 @@ export default {
     mixins: [setDate],
     components: {
         LikeButton
+    },
+    methods: {
+        showPost() {
+            this.$store.commit('showModal');
+            this.$store.commit('showPost');
+        }
     }
 }
 </script>

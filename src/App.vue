@@ -1,6 +1,6 @@
 <template>
     <div id="apps">
-        <header class="white-colored" :class="fixObject">
+        <header class="white-colored" :class="{ 'header-modal-fix': $store.state.isModalShowed }">
             <div class="container_center header-container">
                 <img src="./assets/logo.png" alt="Logo"/>
                 <ul class="header__nav__list">
@@ -26,8 +26,20 @@
             <router-view/>
         </transition>
 
-        <footer class="footer-container white-colored" :class="fixObject">
+        <footer class="footer-container white-colored" :class="{ 'header-modal-fix': $store.state.isModalShowed }">
             <img src="./assets/logo.png" alt="Logo"/>
+
+            <div class="footer__socials">
+                <a
+                        v-for="item of socials"
+                        :key="item.id"
+                        :title="item.name"
+                        href="#"
+                        class="footer__socials__item"
+
+                ><i :class="item.html"></i></a>
+            </div>
+
             <p class="footer-copyrights">© 2016 <span>multix theme</span> by themeforces. all rights reserved.</p>
         </footer>
     </div>
@@ -46,8 +58,16 @@ export default {
                 {id: 3, to: '/blog', name: 'blog'},
                 {id: 4, to: '/contact', name: 'contact'}
             ],
-            currentLink: '',
-            modalIsShowed: false
+            socials: [
+                {id: 1, name: 'Facebook', html: 'fab fa-facebook'},
+                {id: 2, name: 'Google', html: 'fab fa-google-plus'},
+                {id: 3, name: 'Twitter', html: 'fab fa-twitter'},
+                {id: 4, name: 'LinkedIn', html: 'fab fa-linkedin'},
+                {id: 5, name: 'VK', html: 'fab fa-vk'},
+                {id: 6, name: 'Pinterest', html: 'fab fa-pinterest'},
+                {id: 7, name: 'Instagram', html: 'fab fa-instagram'}
+            ],
+            currentLink: ''
         }
     },
     components: {
@@ -55,29 +75,28 @@ export default {
     },
     methods: {
         fixBodyOn() {
-            this.modalIsShowed = true;
             document.body.style.paddingRight = this.scrollWidth + 'px';
             document.body.style.overflow = 'hidden';
         },
         fixBodyOff() {
-            this.modalIsShowed = false;
             document.body.style.paddingRight = '';
             document.body.style.overflow = 'auto';
         }
     },
     computed: {
-        fixObject() {
-            return {
-                'header-modal-fix': this.modalIsShowed
-            }
-        },
         scrollWidth() {
             return window.innerWidth - document.documentElement.clientWidth;
         }
     },
     created() {
-        this.$root.$on('modal-showed', this.fixBodyOn);
-        this.$root.$on('modal-closed', this.fixBodyOff);
+        this.$store.watch(state => state.isModalShowed, isShowed => {
+
+            if (isShowed) {
+                this.fixBodyOn();
+            } else {
+                this.fixBodyOff();
+            }
+        });
     }
 }
 </script>
@@ -140,6 +159,19 @@ header, footer {
     color: black;
 }
 
+.footer__socials {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.footer__socials__item {
+    margin: 0 15px;
+    /*color: #777777;*/
+}
+
 .white-colored {
     background-color: #ffffff;
 }
@@ -150,7 +182,7 @@ header, footer {
 }
 
 .header-modal-fix {
-    padding-right: 20px;
+    padding-right: 17px;
 }
 
 .modal__backdrop {

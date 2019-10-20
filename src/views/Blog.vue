@@ -2,8 +2,7 @@
     <div class="blog">
         <transition name="modal">
             <router-view
-                    v-if="modalPostShow"
-                    @close-post="closeModal"
+                    v-if="$store.state.isPostShowed"
             />
         </transition>
         <div class="top-heading-container_blog">
@@ -14,7 +13,7 @@
         </div>
 
         <div class="blog-container container_center">
-            <LianBlog @open-post="showModal"/>
+            <LianBlog/>
             <BlogSidebar/>
         </div>
     </div>
@@ -29,21 +28,6 @@ export default {
     components: {
         LianBlog,
         BlogSidebar
-    },
-    data() {
-        return {
-            modalPostShow: true
-        }
-    },
-    methods: {
-        showModal() {
-            this.$root.$emit('modal-showed');
-            this.modalPostShow = true;
-        },
-        closeModal() {
-            this.$root.$emit('modal-closed');
-            this.modalPostShow = false;
-        },
     }
 }
 </script>
@@ -51,10 +35,6 @@ export default {
 <style>
 .top-heading-container_blog {
     background: #f6f6f8 no-repeat url("../assets/blog_heading.png") 60% 47%;
-}
-
-.blog {
-    /*margin-top: 10px;*/
 }
 
 .blog-container {

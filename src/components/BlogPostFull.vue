@@ -80,7 +80,8 @@ export default {
     },
     methods: {
         closePost() {
-            this.$emit('close-post');
+            this.$store.commit('hidePost');
+            this.$store.commit('hideModal');
             this.$router.go(-1);
         }
     }
@@ -94,7 +95,6 @@ export default {
     min-height: 1910px;
     margin: 0 auto;
     flex-direction: column;
-    /*justify-content: center;*/
     align-items: center;
     background-color: #fafafa;
 }
@@ -137,8 +137,6 @@ export default {
 }
 
 .blog__single-post__quote {
-    /*box-sizing: border-box;
-    width: 100%;*/
     text-transform: initial;
     padding: 17px 10px 20px 40px;
     margin: 18px 0;

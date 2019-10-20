@@ -6,18 +6,20 @@
     >
         <transition :name="transitionName" mode="in-out">
             <div
-                    class="slider__item slider__slide-one"
                     v-if="currentSlide === 0"
                     :key="0"
+                    class="slider__item slider__slide-one"
+                    :class="{ 'header-modal-fix': $store.state.isModalShowed }"
             >
                 <h1 class="heading-font font-lighter"><span>lian creative agency</span></h1>
                 <p class="heading-font__add font-lighter">minimal freelance portfolio</p>
             </div>
 
             <div
-                    class="slider__item slider__slide-two"
                     v-if="currentSlide === 1"
                     :key="1"
+                    class="slider__item slider__slide-two"
+                    :class="{ 'header-modal-fix': $store.state.isModalShowed }"
             >
                 <h1 class="heading-font font-lighter"><span>we deliever quality results</span></h1>
                 <p class="heading-font__add font-lighter">design & branding</p>
@@ -29,12 +31,14 @@
                 href="#"
                 @click.prevent="prevSlide"
                 :class="{ 'slider__controls-fade-in': mouseOver }"
+
         >&#10094;</a>
         <a
                 class="slider__control slider__control__right"
                 href="#"
                 @click.prevent="nextSlide"
                 :class="{ 'slider__controls-fade-in': mouseOver }"
+
         >&#10095;</a>
 
         <div class="slider-dots" :class="{ 'slider__controls-fade-in': mouseOver }">
@@ -42,11 +46,13 @@
                     class="slider-dots__item"
                     @click.prevent="showSlide(0)"
                     :class="{'slider-dots_current': currentSlide === 0}"
+
             ></span>
             <span
                     class="slider-dots__item"
                     @click.prevent="showSlide(1)"
                     :class="{'slider-dots_current': currentSlide === 1}"
+
             ></span>
         </div>
     </div>
@@ -94,14 +100,12 @@
 
 <style>
 .slider {
-    max-width: 100%;
     height: 650px;
-    overflow: hidden;
     position: relative;
 }
 
 .slider__slide-one {
-    background: url("../assets/sliderFirstNew.png") no-repeat right;
+    background: url("../assets/sliderFirstNew.png") no-repeat center;
 }
 
 .slider__slide-two {

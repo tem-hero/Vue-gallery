@@ -2,7 +2,7 @@
     <transition name="modal-fade">
         <div
                 class="modal__backdrop modal__backdrop__gallery"
-                @click.prevent="close"
+                @click.self="close"
         >
             <div class="modal__gallery modal">
                 <div
@@ -44,8 +44,7 @@ export default {
     name: "ModalWindow",
     props: ['modalId'],
     methods: {
-        close(e) {
-            if (e.target !== e.currentTarget) return;
+        close() {
             this.$emit('close');
         }
     }

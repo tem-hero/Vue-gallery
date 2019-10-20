@@ -86,8 +86,8 @@
         </div>
 
         <ModalWindow
-                :modalId="modalData.id"
-                v-show="modalData.isVisible"
+                :modalId="currentModalId"
+                v-show="$store.state.isModalShowed"
                 @close="closeModal"
                 @prev-img="modalPrev"
                 @next-img="modalNext"
@@ -101,21 +101,21 @@
 
             <template v-slot:post>
 
-                <h2 class="product__title">{{ itemInfo[modalData.id % 2].title }}</h2>
-                <p class="product__subtitle text__regular-bold">{{ itemInfo[modalData.id % 2].subtitle }}</p>
+                <h2 class="product__title">{{ itemInfo[currentModalId % 2].title }}</h2>
+                <p class="product__subtitle text__regular-bold">{{ itemInfo[currentModalId % 2].subtitle }}</p>
                 <hr class="portfolio__line">
 
                 <article class="product__body">
                     <p class="product__date">
                         <time
-                                :datetime="itemInfo[modalData.id % 2].date"
+                                :datetime="itemInfo[currentModalId % 2].date"
 
-                        >{{ setDate(itemInfo[modalData.id % 2].date) }}</time>
+                        >{{ setDate(itemInfo[currentModalId % 2].date) }}</time>
 
-                        <LikeButton><template>{{ itemInfo[modalData.id % 2].likes }} likes</template></LikeButton>
+                        <LikeButton><template>{{ itemInfo[currentModalId % 2].likes }} likes</template></LikeButton>
                     </p>
 
-                    <p class="product__main-text text__common-p">{{ itemInfo[modalData.id % 2].info }}</p>
+                    <p class="product__main-text text__common-p">{{ itemInfo[currentModalId % 2].info }}</p>
                 </article>
             </template>
         </ModalWindow>
@@ -201,10 +201,7 @@ export default {
             currentTag: 'all',
             rowHeights: [ 0, 0, 0 ],
             showButton: true,
-            modalData: {
-                isVisible: false,
-                id: 1
-            }
+            currentModalId: 1
         }
     },
     methods: {
@@ -216,7 +213,7 @@ export default {
             this.filteredArr = this.allImages
                 .filter(item => item.tag.includes(this.currentTag));
 
-            let newId = this.modalData.id = 1;
+            let newId = this.currentModalId = 1;
             for (let item of this.filteredArr) {
                 item.id = newId;
                 newId++;
@@ -273,32 +270,30 @@ export default {
         },
         showModal(e) {
             if (e.target.tagName !== 'IMG') return;
-            this.modalData.id = +e.target.dataset.id;
-            this.$root.$emit('modal-showed');
-            this.modalData.isVisible = true;
+            this.currentModalId = +e.target.dataset.id;
+            this.$store.commit('showModal');
         },
         closeModal() {
-            this.$root.$emit('modal-closed');
-            this.modalData.isVisible = false;
+            this.$store.commit('hideModal');
         },
         modalPrev() {
-            if (this.modalData.id === 1) {
-                this.modalData.id = this.filteredArr.length;
+            if (this.currentModalId === 1) {
+                this.currentModalId = this.filteredArr.length;
             } else {
-                this.modalData.id -= 1;
+                this.currentModalId -= 1;
             }
         },
         modalNext() {
-            if (this.modalData.id === this.filteredArr.length) {
-                this.modalData.id = 1;
+            if (this.currentModalId === this.filteredArr.length) {
+                this.currentModalId = 1;
             } else {
-                this.modalData.id += 1;
+                this.currentModalId += 1;
             }
         }
     },
     computed: {
         modalImg() {
-            return this.filteredArr[this.modalData.id - 1].src;
+            return this.filteredArr[this.currentModalId - 1].src;
         }
     },
     created() {
