@@ -32,7 +32,7 @@
                             :src="getImgUrl(img.src)"
                             :data-id="img.id"
                             alt="Item"
-                            class="gallery__image"
+                            class="gallery__image gallery__image_fade"
                             @load="calculateRowHeight"
                     ></div>
             </transition-group>
@@ -46,7 +46,7 @@
                             :src="getImgUrl(img.src)"
                             :data-id="img.id"
                             alt="Item"
-                            class="gallery__image"
+                            class="gallery__image gallery__image_fade"
                             @load="calculateRowHeight"
                     ></div>
             </transition-group>
@@ -60,7 +60,7 @@
                             :src="getImgUrl(img.src)"
                             :data-id="img.id"
                             alt="Item"
-                            class="gallery__image"
+                            class="gallery__image gallery__image_fade"
                             @load="calculateRowHeight"
                     ></div>
             </transition-group>
@@ -167,24 +167,13 @@ export default {
                 { src: 'gallery-item1.png', tag: 'logo all', id: 1},
                 { src: 'gallery-item2.png', tag: 'web all', id: 2},
                 { src: 'gallery-item3.png', tag: 'web all', id: 3},
-                { src: 'gallery-item10.png', tag: 'logo web all', id: 4},
+                { src: 'gallery-item10-nofade.jpg', tag: 'logo web all', id: 4},
                 { src: 'gallery-item4.png', tag: 'ui all', id: 5},
                 { src: 'gallery-item5.png', tag: 'wordpress all', id: 6},
                 { src: 'gallery-item6.png', tag: 'web brand all', id: 7},
                 { src: 'gallery-item7.png', tag: 'mobile all', id: 8},
                 { src: 'gallery-item8.png', tag: 'mobile all', id: 9},
                 { src: 'gallery-item9.png', tag: 'mobile all', id: 10}
-            ],
-            itemInfo: [
-                {id: 0, title: 'Pereira Creative Agency', subtitle: 'Branding Design', date: '2015-02-28', likes: 324,
-                    info: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.',
-                    tags: ['Mobile App', 'UI/UX design'], roles: ['Project Designer', 'Lead Designer', 'Markerting Head'],
-                    images: ['portfolio1-1.png', 'gallery-item5.png', 'gallery-item8.png', 'blog-image3.png']},
-
-                {id: 1, title: 'Pereira Creative Agency', subtitle: 'Branding Design', date: '2015-02-28', likes: 727,
-                    info: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.',
-                    tags: ['Mobile App', 'UI/UX design'], roles: ['Project Designer', 'Lead Designer', 'Markerting Head'],
-                    images: ['portfolio2-1.png', 'gallery-item4.png', 'blog-image1.png', 'gallery-item7.png']}
             ],
             galleryNav: [
                 { name: 'all', tag: 'all', id: 1},
@@ -294,6 +283,9 @@ export default {
     computed: {
         modalImg() {
             return this.filteredArr[this.currentModalId - 1].src;
+        },
+        itemInfo() {
+            return this.$store.state.products;
         }
     },
     created() {
@@ -342,8 +334,31 @@ export default {
 }
 
 .gallery__item {
+    position: relative;
     margin-bottom: 30px;
     cursor: pointer;
+    background-color: #000000;
 }
 
+.gallery__image_fade:hover {
+    opacity: 0.3;
+}
+
+.gallery__item:hover::before, .gallery__item:hover::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background-color: #cbcbcb;
+}
+
+.gallery__item:hover::before {
+    top: calc(50% - 20px);
+}
+
+.gallery__item:hover::after {
+    top: calc(50% - 20px);
+    transform: rotate(90deg);
+}
 </style>

@@ -27,7 +27,7 @@
         </transition>
 
         <footer class="footer-container white-colored" :class="{ 'header-modal-fix': $store.state.isModalShowed }">
-            <img src="./assets/logo.png" alt="Logo"/>
+            <img src="./assets/logo.png" class="footer__logo" alt="Logo"/>
 
             <div class="footer__socials">
                 <a
@@ -139,7 +139,7 @@ header {
 }
 
 footer {
-    height: 200px;
+    height: 300px;
     box-shadow: 0 -1px 6px 1px rgba(0,0,0,0.05);
 }
 
@@ -149,10 +149,13 @@ header, footer {
     position: relative;
 }
 
+.footer__logo {
+    margin-top: 68px;
+}
+
 .footer-copyrights {
     font-size: 13px;
     color: #9c9c9c;
-    margin-top: 36px;
 }
 
 .footer-copyrights span {
@@ -161,6 +164,8 @@ header, footer {
 
 .footer__socials {
     display: flex;
+    width: 100%;
+    margin: 44px 0 38px;
     justify-content: center;
     padding: 20px 0;
     border-top: 1px solid #ebebeb;
@@ -168,8 +173,8 @@ header, footer {
 }
 
 .footer__socials__item {
-    margin: 0 15px;
-    /*color: #777777;*/
+    margin: 0 30px;
+    color: #777777;
 }
 
 .white-colored {
@@ -219,7 +224,6 @@ header, footer {
 
 .footer-container {
     flex-direction: column;
-    justify-content: center;
 }
 
 .header__nav__list {

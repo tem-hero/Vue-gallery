@@ -46,10 +46,6 @@ export default {
     methods: {
         checkView() {
             if (this.animationStarted) return;
-            if (this.$route.path !== '/about') {
-                window.removeEventListener('scroll', this.checkView);
-                return;
-            }
 
             let scrollY = pageYOffset;
             let currentScroll = document.documentElement.clientHeight + scrollY;
@@ -74,6 +70,9 @@ export default {
     },
     mounted() {
         window.addEventListener('scroll', this.checkView);
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.checkView);
     }
 }
 </script>
