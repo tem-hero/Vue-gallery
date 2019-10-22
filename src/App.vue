@@ -3,22 +3,30 @@
         <header class="white-colored" :class="{ 'header-modal-fix': $store.state.isModalShowed }">
             <div class="container_center header-container">
                 <img src="./assets/logo.png" alt="Logo"/>
-                <ul class="header__nav__list">
+                <transition-group
+
+                        tag="ul"
+                        name="nav"
+                        class="header__nav__list"
+                        @click.native="movePseudo"
+                >
                     <li
                             v-for="link in headerNav"
                             :key="link.id"
                             class="header__nav__list__item"
+                            :class="{ 'page-current-pseudo': link.id === 5 }"
 
                     ><router-link
 
                             :to="link.to"
+                            :data-id="link.id"
                             class="header__nav__link"
                             exact-active-class="page-current-link"
 
                     >{{ link.name }}</router-link>
                     </li>
-                    <HeaderSearch/>
-                </ul>
+                    <HeaderSearch key="9"/>
+                </transition-group>
             </div>
         </header>
 
@@ -59,7 +67,8 @@ export default {
                 {id: 3, to: '/blog', name: 'blog'},
                 {id: 4, to: '/contact', name: 'contact'}
             ],
-            currentLink: '',
+            pseudo: {id: 5, to: '', name: ''},
+            pseudoPosition: 0,
             socials: ''
         }
     },
@@ -74,6 +83,14 @@ export default {
         fixBodyOff() {
             document.body.style.paddingRight = '';
             document.body.style.overflow = 'auto';
+        },
+        movePseudo(e) {
+            if (e.target.tagName !== 'A') return;
+            let index = e.target.dataset.id;
+
+            this.headerNav.splice(this.pseudoPosition, 1);
+            this.headerNav.splice(index, 0, this.pseudo);
+            this.pseudoPosition = index;
         }
     },
     computed: {
@@ -91,6 +108,14 @@ export default {
             }
         });
         this.socials = this.$store.state.socials;
+
+        /*for (let i = 0; i < this.headerNav.length; i++) {
+            if (this.headerNav[i].to === this.$route.path) {
+                this.pseudoPosition = i;
+                break;
+            }
+        }*/
+        this.headerNav.splice(this.pseudoPosition, 0, this.pseudo);
     }
 }
 </script>
@@ -221,6 +246,7 @@ header, footer {
 }
 
 .header__nav__list {
+    position: relative;
     display: flex;
 }
 
@@ -233,7 +259,13 @@ header, footer {
     color: #000000;
 }
 
-.page-current-link::before {
+.page-current-pseudo {
+    position: relative;
+    left: 45px;
+    margin-left: 0;
+}
+
+.page-current-pseudo::before {
     content: '';
     position: absolute;
     width: 19px;
@@ -243,6 +275,21 @@ header, footer {
     margin-left: -30px;
     margin-top: 6px;
 }
+
+.nav-move {
+    transition: transform .5s;
+}
+
+/*.page-current-link::before {
+    content: '';
+    position: absolute;
+    width: 19px;
+    height: 1px;
+    display: block;
+    border-bottom: 1px #06060a solid;
+    margin-left: -30px;
+    margin-top: 6px;
+}*/
 
 .top-heading {
     display: flex;
