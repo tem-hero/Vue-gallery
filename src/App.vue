@@ -27,15 +27,16 @@
         </transition>
 
         <footer class="footer-container white-colored" :class="{ 'header-modal-fix': $store.state.isModalShowed }">
-            <img src="./assets/logo.png" class="footer__logo" alt="Logo"/>
+            <router-link to="/"><img src="./assets/logo.png" class="footer__logo" alt="Logo"/></router-link>
 
             <div class="footer__socials">
                 <a
                         v-for="item of socials"
                         :key="item.id"
                         :title="item.name"
-                        href="#"
+                        :href="item.socialLink"
                         class="footer__socials__item"
+                        @click.prevent
 
                 ><i :class="item.html"></i></a>
             </div>
@@ -58,16 +59,8 @@ export default {
                 {id: 3, to: '/blog', name: 'blog'},
                 {id: 4, to: '/contact', name: 'contact'}
             ],
-            socials: [
-                {id: 1, name: 'Facebook', html: 'fab fa-facebook'},
-                {id: 2, name: 'Google', html: 'fab fa-google-plus'},
-                {id: 3, name: 'Twitter', html: 'fab fa-twitter'},
-                {id: 4, name: 'LinkedIn', html: 'fab fa-linkedin'},
-                {id: 5, name: 'VK', html: 'fab fa-vk'},
-                {id: 6, name: 'Pinterest', html: 'fab fa-pinterest'},
-                {id: 7, name: 'Instagram', html: 'fab fa-instagram'}
-            ],
-            currentLink: ''
+            currentLink: '',
+            socials: ''
         }
     },
     components: {
@@ -97,6 +90,7 @@ export default {
                 this.fixBodyOff();
             }
         });
+        this.socials = this.$store.state.socials;
     }
 }
 </script>
@@ -165,7 +159,7 @@ header, footer {
 .footer__socials {
     display: flex;
     width: 100%;
-    margin: 44px 0 38px;
+    margin: 38px 0;
     justify-content: center;
     padding: 20px 0;
     border-top: 1px solid #ebebeb;
@@ -312,7 +306,7 @@ header, footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 90px;
+    margin-top: 95px;
 }
 
 .text__cards-title {
@@ -394,9 +388,15 @@ header, footer {
     font-size: inherit;
     font-style: italic;
     font-family: inherit;
+    outline: none;
     color: #c4c4c4;
     background-color: #fafafa;
     border: 1px #e1e1e1 solid;
+}
+
+.form-field:focus {
+    padding-left: 8px;
+    border-left: 3px solid #afafaf;
 }
 
 .form__input-field {
@@ -449,7 +449,6 @@ header, footer {
     cursor: pointer;
     position: absolute;
     left: calc(50% - 62px);
-    margin-top: 20px;
 }
 
 .load-button a {

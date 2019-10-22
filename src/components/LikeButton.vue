@@ -2,11 +2,11 @@
     <span>
         <i
                 v-if="isLiked"
-                class="fas fa-heart"
+                class="fas fa-heart o-like-button"
                 @click="like"
         ></i><i
                 v-else
-                class="far fa-heart"
+                class="far fa-heart o-like-button"
                 @click="like"
         ></i><slot></slot>
     </span>
@@ -29,11 +29,11 @@ export default {
 </script>
 
 <style>
-.fa-heart {
+.o-like-button {
     margin: 0 8px 0 45px;
 }
 
-.fas.fa-heart {
+.fas.o-like-button {
     color: #ff0000;
 }
 </style>

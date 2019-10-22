@@ -36,7 +36,7 @@
         <transition name="related-fade">
             <section
                     v-show="relatedVisible"
-                    class="text__cards__container"
+                    class="text__cards__container portfolio__related-container"
             >
                 <h2 class="text__cards-title font-lighter">related works</h2>
 
@@ -53,8 +53,8 @@
                 <div
                         v-for="(prod, index) of relatedProducts"
                         :key="index"
-                        @click="$emit('related-click', prod.id)"
                         class="bottom-cards__item portfolio__related-works"
+                        @click="$emit('related-click', prod.id)"
                 >
                     <img
                             :src="require(`@/assets/${prod.img}`)"
@@ -121,6 +121,10 @@ export default {
     display: flex;
     justify-content: space-between;
     margin-top: 60px;
+}
+
+.portfolio__related-container {
+    margin-top: 142px;
 }
 
 .portfolio__related-works {

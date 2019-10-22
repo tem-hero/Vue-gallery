@@ -1,73 +1,78 @@
 <template>
     <article class="blog__post">
+        <div v-if="post.video">
+            <iframe :src="getVideoUrl(post.video)" width="360" height="203" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
 
-        <div
-                v-if="post.image"
+        <div v-else>
+            <div
+                    v-if="post.image"
             ><img
                     :src="require(`@/assets/${post.imgSrc}`)"
                     class="gallery__image"
                     alt="Image"
-        ></div>
-        <section
-                class="blog__post__section white-colored"
-                :class="{ 'blog__post__transparent': post.imageHover }"
-        >
-            <div
-                    v-if="post.imageHover"
-            ><img
-                    :src="require(`@/assets/${post.imgSrc}`)"
-                    alt="Background"
-                    class="blog__post__image-hover gallery__image"
             ></div>
 
-            <span
-                    v-if="post.blackSpanText"
-                    class="blog__post__wordpress black-span"
-            >{{ post.blackSpanText }}</span>
+            <section
+                    class="blog__post__section white-colored"
+                    :class="{ 'blog__post__transparent': post.imageHover }"
+            >
+                <div
+                        v-if="post.imageHover"
+                ><img
+                        :src="require(`@/assets/${post.imgSrc}`)"
+                        alt="Background"
+                        class="blog__post__image-hover gallery__image"
+                ></div>
 
-            <router-link to="/blog/post">
-                <h2
-                        class="blog__post__title"
-                        @click="showPost"
+                <span
+                        v-if="post.blackSpanText"
+                        class="blog__post__wordpress black-span"
+                >{{ post.blackSpanText }}</span>
 
-                >{{ post.title }}</h2>
-            </router-link>
-            <p class="blog__post__author"><i class="fas fa-user"></i> by {{ post.author }}</p>
+                <router-link to="/blog/post">
+                    <h2
+                            class="blog__post__title"
+                            @click="showPost"
 
-            <router-link to="/blog/post">
-                <p
-                        class="blog__post__content text__common-p"
-                        @click="showPost"
+                    >{{ post.title }}</h2>
+                </router-link>
+                <p class="blog__post__author"><i class="fas fa-user"></i> by {{ post.author }}</p>
 
-                >{{ post.content }}</p>
-            </router-link>
+                <router-link to="/blog/post">
+                    <p
+                            class="blog__post__content text__common-p"
+                            @click="showPost"
 
-            <time
-                    :datetime="post.date"
-                    class="blog__post__date"
+                    >{{ post.content }}</p>
+                </router-link>
 
-            ><i class="far fa-calendar"></i> on {{ setDate(post.date) }}</time>
-            <span class="blog__post__icons"><LikeButton/></span>
+                <time
+                        :datetime="post.date"
+                        class="blog__post__date"
 
-        </section>
+                ><i class="far fa-calendar"></i> on {{ setDate(post.date) }}
+                </time>
+                <span class="blog__post__icons"><i class="fas fa-share-alt"></i> <i class="fas fa-heart"></i></span>
+            </section>
+        </div>
     </article>
 </template>
 
 <script>
 import setDate from '@/components/setDate.vue'
-import LikeButton from '@/components/LikeButton.vue'
 
 export default {
     name: "BlogPost",
     props: ['post'],
     mixins: [setDate],
-    components: {
-        LikeButton
-    },
     methods: {
         showPost() {
             this.$store.commit('showModal');
             this.$store.commit('showPost');
+        },
+        getVideoUrl(url) {
+            return url + '?title=0&byline=0&portrait=0';
         }
     }
 }
@@ -112,7 +117,12 @@ export default {
 
 .blog__post__icons {
     position: absolute;
-    right: 35px;
+    right: 37px;
+    color: #cccccc;
+}
+
+.blog__post__icons .fa-heart {
+    margin-left: 22px;
 }
 
 .blog__post__wordpress {

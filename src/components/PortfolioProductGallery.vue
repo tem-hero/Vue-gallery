@@ -50,6 +50,7 @@ export default {
     display: flex;
     flex-direction: column;
     flex-basis: 550px;
+    margin-top: 8px;
 }
 
 .portfolio__item-container {
@@ -63,7 +64,6 @@ export default {
 }
 
 .portfolio__prod-gallery__main-pic {
-    flex-basis: 100%;
     height: 350px;
     margin-bottom: 10px;
 }

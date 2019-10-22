@@ -77,10 +77,11 @@ export default {
                 content: 'Proin semper suscipit magna, nec imperdiet lacus semper vitae. Sed hendrerit enim non justo posuere placerat eget purus mauris...'},
                 {id: 3, title: 'I am a Blog Post with an Awesome Image', author: 'Jenn Pereira', date: '2016-07-19', image: true, imgSrc: 'blog-image3.png',
                 content: 'Proin semper suscipit magna, nec imperdiet lacus semper vitae. Sed hendrerit enim non justo posuere placerat eget purus mauris...'},
-                {id: 4, title: 'I am a Blog Post with an awesome Image', author: 'Jenn Pereira', date: '2016-07-19', image: true, imgSrc: 'blog-image2.png',
-                content: 'Proin semper suscipit magna, nec imperdiet lacus semper vitae. Sed hendrerit enim non justo posuere placerat eget purus mauris...'},
+                {id: 4, video: 'https://player.vimeo.com/video/117159756'},
                 {id: 5, title: 'I am a Blog Post Title', author: 'Jenn Pereira', date: '2016-07-19', blackSpanText: 'image hover', imageHover: true, imgSrc: 'blog-image4.png',
-                content: 'Phasellus et nisl tellus. Etiam facilisis eu nisi scelerisque faucibus. Proin semper suscipit magna, nec imperdiet lacus semper...'}
+                content: 'Phasellus et nisl tellus. Etiam facilisis eu nisi scelerisque faucibus. Proin semper suscipit magna, nec imperdiet lacus semper...'},
+                {id: 6, title: 'I am a Blog Post with an awesome Image', author: 'Jenn Pereira', date: '2016-07-19', image: true, imgSrc: 'blog-image2.png',
+                content: 'Proin semper suscipit magna, nec imperdiet lacus semper vitae. Sed hendrerit enim non justo posuere placerat eget purus mauris...'}
             ],
             rows: [
                 [], []
@@ -121,7 +122,7 @@ export default {
     position: relative;
     display: flex;
     flex-basis: 750px;
-    margin-bottom: 100px;
+    margin-bottom: 180px;
     justify-content: space-between;
 }
 
@@ -131,7 +132,7 @@ export default {
 
 .load-button-container__grid-center {
     position: absolute;
-    bottom: -105px;
+    bottom: -155px;
     left: calc(50% - 62px);
     width: 124px;
 }

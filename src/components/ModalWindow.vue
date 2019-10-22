@@ -1,34 +1,42 @@
 <template>
-    <transition name="modal-fade">
+    <transition
+            name="modal-fade"
+            @after-enter="isBackShowed = true"
+    >
         <div
                 class="modal__backdrop modal__backdrop__gallery"
-                @click.self="close"
+                @click.self="isBackShowed = false"
         >
-            <div class="modal__gallery modal">
+            <div class="modal modal-container">
                 <div
                         class="modal-button modal-prev"
                         @click.stop="$emit('prev-img')"
 
                 ><span>&#10094;</span></div>
 
-                <transition name="fade" mode="out-in">
+                <transition
+                        name="fade"
+                        mode="out-in"
+                        @after-leave="checkStatus"
+                >
                     <div
+                            v-if="isBackShowed"
                             :key="modalId"
-                            class="modal__image-wrapper"
+                            class="modal__gallery"
                     >
-                        <slot name="image"></slot>
+                        <div
+                                class="modal__image-wrapper"
+                        >
+                            <slot name="image"></slot>
+                        </div>
+
+                        <div
+                                class="modal__post-wrapper"
+                        >
+                            <slot name="post"></slot>
+                        </div>
                     </div>
                 </transition>
-
-                <transition name="fade" mode="out-in">
-                    <div
-                            :key="modalId"
-                            class="modal__post-wrapper"
-                    >
-                        <slot name="post"></slot>
-                    </div>
-                </transition>
-
                 <div
                         class="modal-button modal-next"
                         @click.stop="$emit('next-img')"
@@ -43,8 +51,14 @@
 export default {
     name: "ModalWindow",
     props: ['modalId'],
+    data() {
+        return {
+            isBackShowed: false
+        }
+    },
     methods: {
-        close() {
+        checkStatus() {
+            if (this.isBackShowed) return;
             this.$emit('close');
         }
     }
@@ -59,14 +73,18 @@ export default {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+.modal-container {
+    max-width: 1000px;
+    box-shadow: 2px 2px 20px 1px;
+    background-color: #ffffff;
+}
+
 .modal__gallery {
     display: flex;
     flex-basis: 950px;
     height: 450px;
     padding: 30px;
     justify-content: space-between;
-    box-shadow: 2px 2px 20px 1px;
-    background-color: #FFFFFF;
 }
 
 .modal__image-wrapper {
@@ -107,13 +125,12 @@ export default {
     cursor: default;
 }
 
-.modal-fade-enter,
-.modal-fade-leave-active {
+.modal-fade-enter, .modal-fade-leave-to {
     opacity: 0;
 }
 
-.modal-fade-enter-active {
-    transition: opacity .3s;
+.modal-fade-enter-active, .modal-fade-leave-active {
+    transition: opacity .1s ease-out;
 }
 
 </style>

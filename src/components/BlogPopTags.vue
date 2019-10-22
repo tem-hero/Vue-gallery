@@ -7,13 +7,12 @@
                     :key="item.id"
                     class="blog__aside-tags__item"
             >
-                <a
+                <span
                         class="white-colored blog__aside-tags__a"
                         :class="{ 'blog__aside-tags__a_checked': item.checked }"
-                        href="#"
-                        @click.prevent="toggleTag(item.id - 1)"
+                        @click="toggleTag(item.id - 1)"
 
-                >{{ item.tag }}</a>
+                >{{ item.tag }}</span>
             </li>
         </ul>
     </div>
@@ -59,9 +58,9 @@
     color: #9c9c9c;
     font-size: 13px;
     text-transform: initial;
-    font-weight: normal;
     border: 1px #eeeeee solid;
     padding: 5px 15px;
+    cursor: pointer;
 }
 
 .blog__aside-tags__a:hover,

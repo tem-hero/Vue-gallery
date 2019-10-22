@@ -323,7 +323,7 @@ export default {
 
 .gallery {
     display: flex;
-    min-height: 1340px;
+    min-height: 1320px;
     margin-top: 30px;
     justify-content: space-between;
 }

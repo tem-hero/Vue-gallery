@@ -9,30 +9,28 @@
 
         <nav class="white-colored">
             <div class="portfolio__nav-container container_center">
-                <a
+                <span
+                        class="portfolio__prev-button portfolio__nav-button"
                         @click.prevent="setCurrentProduct(Math.abs(currentProduct - 1))"
-                        href="#"
-                        class="portfolio__prev-button"
 
-                    >previous</a>
-                <a
+                    >previous</span>
+                <span
+                        class="portfolio__next-button portfolio__nav-button"
                         @click.prevent="setCurrentProduct((currentProduct + 1) % products.length)"
-                        href="#"
-                        class="portfolio__next-button"
 
-                    >next</a>
-                <a
-                        class="portfolio__menu-show-all"
+                    >next</span>
+                <span
+                        class="portfolio__menu-show-all portfolio__nav-button"
                         @mouseenter="menuShow"
                         @mouseleave="menuHide"
 
-                    ><i class="fas fa-bars"></i>show all<transition-group
+                    ><i class="fas fa-list-ul"></i> show all<transition-group
 
                             name="menu-show"
                             tag="ul"
-                            @click.prevent.native="showProduct"
                             class="portfolio__dropdown"
                             :class="menuShadow"
+                            @click.native="showProduct"
                             @after-enter="menuShow"
                             @leave="menuHide"
                     >
@@ -41,13 +39,12 @@
                                 :key="item.id"
                                 class="portfolio__dropdown__item white-colored"
 
-                        ><a
-                                href="#"
+                        ><span
                                 :data-id="item.id"
-                                class="portfolio__dropdown__link">{{ item.name }}</a>
+                                class="portfolio__dropdown__link">{{ item.name }}</span>
                         </li>
 
-                    </transition-group></a>
+                    </transition-group></span>
             </div>
         </nav>
 
@@ -95,7 +92,7 @@ export default {
             this.currentProduct = id;
         },
         showProduct(e) {
-            if (e.target.tagName !== 'A') return;
+            if (e.target.tagName !== 'SPAN') return;
             this.currentProduct = e.target.dataset.id % 2;
             this.menuHide();
         },
@@ -128,12 +125,16 @@ export default {
     display: flex;
 }
 
-.portfolio__prev-button, .portfolio__next-button,
-.portfolio__menu-show-all {
+.portfolio__nav-button, .portfolio__dropdown__link {
     display: inline-block;
+    cursor: default;
+}
+
+.portfolio__nav-button {
     width: 164px;
     text-align: center;
     padding: calc(36px - 0.9rem) 0;
+    font-weight: bold;
     border-right: 1px #ebebeb solid;
     border-left: 1px #ebebeb solid;
     color: #000000;
@@ -147,15 +148,13 @@ export default {
     position: relative;
     margin-left: auto;
     width: 196px;
-    cursor: default;
 }
 
-.fas.fa-bars {
+.fas.fa-list-ul {
     margin-right: 6px;
 }
 
-.portfolio__prev-button:hover, .portfolio__next-button:hover,
-.portfolio__menu-show-all:hover, .portfolio__dropdown__item:hover {
+.portfolio__nav-button:hover, .portfolio__dropdown__item:hover {
     background-color: #fafafa;
     transition: color .15s linear;
 }
@@ -213,7 +212,6 @@ export default {
 }
 
 .portfolio__dropdown__link {
-    display: inline-block;
     width: 100%;
     padding: calc(26px - 0.9rem) 0;
 }

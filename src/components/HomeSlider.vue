@@ -26,20 +26,18 @@
             </div>
         </transition>
 
-        <a
+        <span
                 class="slider__control slider__control__left"
-                href="#"
-                @click.prevent="prevSlide"
                 :class="{ 'slider__controls-fade-in': mouseOver }"
+                @click="prevSlide"
 
-        >&#10094;</a>
-        <a
+        ></span>
+        <span
                 class="slider__control slider__control__right"
-                href="#"
-                @click.prevent="nextSlide"
                 :class="{ 'slider__controls-fade-in': mouseOver }"
+                @click="nextSlide"
 
-        >&#10095;</a>
+        ></span>
 
         <div class="slider-dots" :class="{ 'slider__controls-fade-in': mouseOver }">
             <span
@@ -105,7 +103,7 @@
 }
 
 .slider__slide-one {
-    background: url("../assets/sliderFirstNew.png") no-repeat center;
+    background: url("../assets/sliderFirstNew.png") no-repeat top;
 }
 
 .slider__slide-two {
@@ -125,16 +123,23 @@
 
 .slider__control, .slider-dots {
     position: absolute;
-    color: black;
     z-index: 10;
     opacity: 0;
-    transition: opacity 0.5s;
 }
 
 .slider__control {
     top: 50%;
-    font-weight: lighter;
-    font-size: 26px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #fefefe;
+    cursor: pointer;
+    transition: border-color .25s, background-color .25s, opacity .5s;
+}
+
+.slider__control:hover {
+    border-color: #000000;
+    background-color: #000000;
 }
 
 .slider__control__left {
@@ -145,29 +150,52 @@
     right: 3%;
 }
 
+.slider__control__left::after,
+.slider__control__right::after {
+    content: '';
+    position: absolute;
+    top: 27%;
+    width: 15px;
+    height: 15px;
+    border-bottom: 1px solid #fefefe;
+    border-left: 1px solid #fefefe;
+}
+
+.slider__control__left::after {
+    left: 37%;
+    transform: rotate(45deg);
+}
+
+.slider__control__right::after {
+    right: 37%;
+    transform: rotate(-135deg);
+}
+
 .slider-dots {
-    bottom: 2%;
+    bottom: 4%;
     left: 50%;
     text-align: center;
+    transition: opacity .5s;
 }
 
 .slider__controls-fade-in {
-    opacity: 0.3;
+    opacity: 1;
 }
 
 .slider-dots__item {
-    cursor: pointer;
-    height: 12px;
-    width: 12px;
-    margin: 0 2px;
-    background-color: #fafafa;
-    border-radius: 50%;
     display: inline-block;
-    transition: background-color 0.5s;
+    box-sizing: border-box;
+    height: 13px;
+    width: 13px;
+    margin: 0 2px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    cursor: pointer;
+    border: 4px solid transparent;
+    transition: border-color .5s;
 }
 
 .slider-dots_current {
-    background-color: #000000;
+    border-color: #000000;
 }
-
 </style>

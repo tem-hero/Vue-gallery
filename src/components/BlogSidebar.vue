@@ -39,7 +39,7 @@ export default {
     cursor: default;
 }
 
-.blog__aside-head:before {
+.blog__aside-head::before {
     content: "";
     border: solid transparent;
     position: absolute;
