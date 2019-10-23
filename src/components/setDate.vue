@@ -1,4 +1,3 @@
-<template></template>
 
 <script>
 function formatDate(d) {
