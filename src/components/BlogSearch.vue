@@ -3,7 +3,7 @@
         <label>
             <input type="search" placeholder="Search" class="blog__search__input-item">
         </label>
-        <button type="submit" class="blog__search__button-item"><i class="fas fa-search"></i></button>
+        <button type="submit" class="blog__search__button-item"><i class="fas fa-search blog__search__icon"></i></button>
     </form>
 </template>
 
@@ -42,7 +42,7 @@ export default {
     cursor: pointer;
 }
 
-.fas.fa-search {
+.blog__search__icon {
     font-size: 16px;
     color: #ffffff;
 }
