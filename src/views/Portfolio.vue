@@ -114,7 +114,7 @@ export default {
 
 <style>
 .portfolio-page {
-    min-height: 1520px;
+    min-height: 1645px;
 }
 
 .top-heading-container_portfolio {

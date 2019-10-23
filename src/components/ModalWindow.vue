@@ -1,6 +1,6 @@
 <template>
     <transition
-            name="modal-fade"
+            name="fade"
             @after-enter="isBackShowed = true"
     >
         <div
@@ -123,14 +123,6 @@ export default {
 .modal-button:hover {
     background-color: rgba(187, 186, 186, 0.5);
     cursor: default;
-}
-
-.modal-fade-enter, .modal-fade-leave-to {
-    opacity: 0;
-}
-
-.modal-fade-enter-active, .modal-fade-leave-active {
-    transition: opacity .1s ease-out;
 }
 
 </style>

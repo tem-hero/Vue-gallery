@@ -1,8 +1,12 @@
 <template>
     <div class="blog">
-        <transition name="modal">
+        <transition
+                name="fade"
+                @after-enter="isBackShowed = true">
             <router-view
                     v-if="$store.state.isPostShowed"
+                    :backShowed="isBackShowed"
+                    @reset-back="isBackShowed = false"
             />
         </transition>
         <div class="top-heading-container_blog">
@@ -25,6 +29,11 @@ import BlogSidebar from '@/components/BlogSidebar.vue'
 
 export default {
     name: 'Blog',
+    data() {
+        return {
+            isBackShowed: false
+        }
+    },
     components: {
         LianBlog,
         BlogSidebar
@@ -42,12 +51,4 @@ export default {
     justify-content: space-between;
 }
 
-.modal-enter-active, .modal-leave-active {
-    transition: opacity .4s, transform .1s;
-}
-
-.modal-enter, .modal-leave-to {
-    opacity: 0;
-    transform: scale(0.95, 0.98);
-}
 </style>

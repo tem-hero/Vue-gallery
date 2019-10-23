@@ -109,12 +109,12 @@ export default {
         });
         this.socials = this.$store.state.socials;
 
-        /*for (let i = 0; i < this.headerNav.length; i++) {
-            if (this.headerNav[i].to === this.$route.path) {
+        for (let i = 0; i < this.headerNav.length; i++) {
+            if (this.headerNav[i].to === window.location.pathname) {
                 this.pseudoPosition = i;
                 break;
             }
-        }*/
+        }
         this.headerNav.splice(this.pseudoPosition, 0, this.pseudo);
     }
 }
@@ -540,6 +540,15 @@ header, footer {
     }
 }
 
+.slide-next-enter, .slide-prev-enter,
+.slide-next-leave-to, .slide-prev-leave-to,
+.fade-enter, .fade-leave-to,
+.gal-images-leave-to, .gal-button-enter,
+.prod-fade-enter, .prod-fade-leave-to,
+.related-fade-enter, .related-fade-leave-to {
+    opacity: 0;
+}
+
 .slide-next-enter-active, .slide-prev-enter-active {
     transition: opacity 1.2s, transform .8s ease-out;
 }
@@ -548,26 +557,8 @@ header, footer {
     transition: opacity 1.2s;
 }
 
-.slide-next-enter {
-    /*transform: translateX(10%);*/
-    opacity: 0;
-}
-
-.slide-prev-enter {
-    /*transform: translateX(-10%);*/
-    opacity: 0;
-}
-
-.slide-next-leave-to, .slide-prev-leave-to {
-    opacity: 0;
-}
-
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active {
     transition: opacity .2s;
-}
-
-.fade-enter, .fade-leave-to {
-    opacity: 0;
 }
 
 .gal-images-enter-active {
@@ -579,10 +570,6 @@ header, footer {
     opacity: 0;
 }
 
-.gal-images-leave-to, .gal-button-enter {
-    opacity: 0;
-}
-
 .gal-button-enter-active {
     transition: opacity .5s;
 }
@@ -591,7 +578,8 @@ header, footer {
     transition: opacity .3s linear;
 }
 
-.prod-fade-enter, .prod-fade-leave-to {
-    opacity: 0;
+.related-fade-enter-active {
+    transition: opacity .7s linear;
 }
+
 </style>

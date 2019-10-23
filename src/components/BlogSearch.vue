@@ -47,10 +47,4 @@ export default {
     color: #ffffff;
 }
 
-/*input.blog__search__input-item[type="search"]::-webkit-search-decoration,
-input.blog__search__input-item[type="search"]::-webkit-search-cancel-button,
-input.blog__search__input-item[type="search"]::-webkit-search-results-button,
-input.blog__search__input-item[type="search"]::-webkit-search-results-decoration {
-    display: none;
-}*/
 </style>

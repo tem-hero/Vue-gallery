@@ -137,11 +137,4 @@ export default {
     cursor: pointer;
 }
 
-.related-fade-enter-active {
-    transition: opacity .7s linear;
-}
-
-.related-fade-enter, .related-fade-leave-to {
-    opacity: 0;
-}
 </style>

@@ -17,10 +17,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.home {
-    /*margin-top: 36px;*/
-}
-
-</style>

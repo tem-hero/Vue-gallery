@@ -3,70 +3,88 @@
             class="blog__single-post__backdrop modal__backdrop"
             @click.self="closePost"
     >
-        <main class="blog__single-post modal">
-            <span
-                    class="blog__single-post__back-button"
-                    @click="closePost"
+        <transition name="gal-images">
+            <main
+                    v-show="backShowed"
+                    class="blog__single-post modal"
+            >
+                <span
+                        class="blog__single-post__back-button"
+                        @click="closePost"
 
-            >&#10005;</span>
+                >&#10005;</span>
 
-            <h2 class="blog__single-post__title font-lighter">I am a Blog Post with an Awesome Image</h2>
-            <p class="blog__single-post__subtitle text__regular-bold">
-                <span>by Jenn Pereira</span>
-                <time datetime="28-02-2015" class="blog__single-post__date">February 28, 2015</time>
-                <span><LikeButton/>324 likes</span>
-            </p>
+                <h2 class="blog__single-post__title font-lighter">I am a Blog Post with an Awesome Image</h2>
+                <p class="blog__single-post__subtitle text__regular-bold">
+                    <span>by Jenn Pereira</span>
+                    <time datetime="28-02-2015" class="blog__single-post__date">February 28, 2015</time>
+                    <span><LikeButton/>324 likes</span>
+                </p>
 
-            <img class="gallery__image blog__single-post__img" src="../assets/single-post-img.png" alt="Pic">
+                <img class="gallery__image blog__single-post__img" src="../assets/single-post-img.png" alt="Pic">
 
-            <p class="blog__single-post__p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                ullamcorper suscipit. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
-            <p class="blog__single-post__p">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
-                eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-                luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis
-                eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
-            <blockquote class="blog__single-post__quote">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-                rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt.
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.
-            </blockquote>
-            <h3 class="blog__single-post__heading product__tags-title">This is a Heading</h3>
-            <p class="blog__single-post__p">Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes
-                demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus,
-                qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus
-                parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima.
-                Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
-            <p class="blog__single-post__p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
-                in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at
-                vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis
-                dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue.</p>
-            <p class="form__comment-heading">leave a comment</p>
-            <form class="form__comment-container" action="" method="post">
+                <p class="blog__single-post__p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+                    nonummy nibh euismod tincidunt ut
+                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                    ullamcorper suscipit. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+                    suscipit.</p>
+                <p class="blog__single-post__p">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                    molestie consequat, vel illum dolore
+                    eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
+                    luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta
+                    nobis
+                    eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+                <blockquote class="blog__single-post__quote">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam
+                    rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
+                    sunt.
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.
+                </blockquote>
+                <h3 class="blog__single-post__heading product__tags-title">This is a Heading</h3>
+                <p class="blog__single-post__p">Typi non habent claritatem insitam; est usus legentis in iis qui facit
+                    eorum claritatem. Investigationes
+                    demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus
+                    dynamicus,
+                    qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc
+                    putamus
+                    parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima.
+                    Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+                <p class="blog__single-post__p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+                    nonummy nibh euismod tincidunt ut
+                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                    dolor
+                    in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
+                    at
+                    vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis
+                    dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue.</p>
+                <p class="form__comment-heading">leave a comment</p>
+                <form class="form__comment-container" action="" method="post">
 
-                <div class="form__top-field-container">
+                    <div class="form__top-field-container">
 
-                    <label class="comment__form__top-field">
-                        <input type="text" name="name" class="form-field form__input-field" placeholder="Name">
-                    </label>
-                    <label class="comment__form__top-field">
-                        <input type="email" name="mail" class="form-field form__input-field" placeholder="Email">
-                    </label>
-                    <label class="comment__form__top-field">
-                        <input type="url" name="website" class="form-field form__input-field" placeholder="Website">
-                    </label>
+                        <label class="comment__form__top-field">
+                            <input type="text" name="name" class="form-field form__input-field" placeholder="Name">
+                        </label>
+                        <label class="comment__form__top-field">
+                            <input type="email" name="mail" class="form-field form__input-field" placeholder="Email">
+                        </label>
+                        <label class="comment__form__top-field">
+                            <input type="url" name="website" class="form-field form__input-field" placeholder="Website">
+                        </label>
 
-                </div>
+                    </div>
 
-                <label class="form__mid-field">
-                        <textarea name="message" class="form-field form__textarea-field" placeholder="Message" cols="111"
+                    <label class="form__mid-field">
+                        <textarea name="message" class="form-field form__textarea-field" placeholder="Message"
+                                  cols="111"
                                   rows="5"></textarea>
-                </label>
-                <input type="submit" value="send message" class="form__submit-button form__submit-button_center">
-            </form>
-        </main>
+                    </label>
+                    <input type="submit" value="send message" class="form__submit-button form__submit-button_center">
+                </form>
+            </main>
+        </transition>
     </div>
 </template>
 
@@ -75,6 +93,7 @@ import LikeButton from '@/components/LikeButton.vue'
 
 export default {
     name: "BlogPostFull",
+    props: ['backShowed'],
     components: {
         LikeButton
     },
@@ -82,6 +101,7 @@ export default {
         closePost() {
             this.$store.commit('hidePost');
             this.$store.commit('hideModal');
+            this.$emit('reset-back');
             this.$router.go(-1);
         }
     }
@@ -175,4 +195,5 @@ export default {
     display: block;
     width: 32%;
 }
+
 </style>

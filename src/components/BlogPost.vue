@@ -1,7 +1,7 @@
 <template>
     <article class="blog__post">
         <div v-if="post.video">
-            <iframe :src="getVideoUrl(post.video)" width="360" height="203" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <iframe :src="getVideoUrl(post.video)" width="360" height="203" frameborder="0" allow="fullscreen" allowfullscreen></iframe>
         </div>
 
         <div v-else>
