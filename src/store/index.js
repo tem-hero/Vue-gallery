@@ -28,7 +28,11 @@ export default new Vuex.Store({
             {id: 7, name: 'Instagram', html: 'fab fa-instagram', socialLink: '#', shareLink: '#'}
         ]
     },
-    getters: {},
+    getters: {
+        allSocials(state) {
+            return state.socials;
+        }
+    },
     actions: {},
     mutations: {
         showModal(state) {

@@ -37,11 +37,10 @@
         <footer class="footer-container white-colored" :class="{ 'header-modal-fix': $store.state.isModalShowed }">
             <router-link to="/"><img src="./assets/logo.png" class="footer__logo" alt="Logo"/></router-link>
 
-            <div class="footer__socials">
+            <div class="footer__social-icons">
                 <a
                         v-for="item of socials"
                         :key="item.id"
-                        :title="item.name"
                         :href="item.socialLink"
                         class="footer__socials__item"
                         @click.prevent
@@ -68,8 +67,7 @@ export default {
                 {id: 4, to: '/contact', name: 'contact'}
             ],
             pseudo: {id: 5, to: '', name: ''},
-            pseudoPosition: 0,
-            socials: ''
+            pseudoPosition: 0
         }
     },
     components: {
@@ -96,6 +94,9 @@ export default {
     computed: {
         scrollWidth() {
             return window.innerWidth - document.documentElement.clientWidth;
+        },
+        socials() {
+            return this.$store.getters.allSocials;
         }
     },
     created() {
@@ -107,7 +108,6 @@ export default {
                 this.fixBodyOff();
             }
         });
-        this.socials = this.$store.state.socials;
 
         for (let i = 0; i < this.headerNav.length; i++) {
             if (this.headerNav[i].to === window.location.pathname) {
@@ -135,12 +135,12 @@ export default {
     padding: 0;
 }
 
-ul {
-    list-style: none;
-}
-
 body {
     background-color: #fafafa;
+}
+
+ul {
+    list-style: none;
 }
 
 a {
@@ -149,12 +149,20 @@ a {
     color: #6d6666;
 }
 
+header, footer {
+    position: relative;
+    width: 100%;
+    z-index: 100;
+}
+
 header {
-    height: 90px;
+    /*display: flex;*/
+    box-sizing: border-box;
+    height: 91px;
+    padding: 28px 1.1rem;
+    /*justify-content: center;*/
+    /*align-items: center;*/
     box-shadow: 0 1px 5px 1px rgba(0,0,0,0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 footer {
@@ -162,70 +170,10 @@ footer {
     box-shadow: 0 -1px 6px 1px rgba(0,0,0,0.05);
 }
 
-header, footer {
-    width: 100%;
-    z-index: 100;
-    position: relative;
-}
-
-.footer__logo {
-    margin-top: 68px;
-}
-
-.footer-copyrights {
-    font-size: 13px;
-    color: #9c9c9c;
-}
-
-.footer-copyrights span {
-    color: black;
-}
-
-.footer__socials {
-    display: flex;
-    width: 100%;
-    margin: 38px 0;
-    justify-content: center;
-    padding: 20px 0;
-    border-top: 1px solid #ebebeb;
-    border-bottom: 1px solid #ebebeb;
-}
-
-.footer__socials__item {
-    margin: 0 30px;
-    color: #777777;
-}
-
-.white-colored {
-    background-color: #ffffff;
-}
-
-.gallery__image {
-    display: block;
-    width: 100%;
-}
-
-.header-modal-fix {
-    padding-right: 17px;
-}
-
-.modal__backdrop {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 9000;
-    overflow: auto;
-}
-
-.modal {
-    position: relative;
-    z-index: 9999;
-}
-
 .container_center {
+    display: block;
     max-width: 1140px;
+    /*width: 100%;*/
     margin-left: auto;
     margin-right: auto;
 }
@@ -236,8 +184,7 @@ header, footer {
 }
 
 .header-container {
-    width: 100%;
-    padding: 0 1.1rem;
+    /*width: 100%;*/
     justify-content: space-between;
 }
 
@@ -280,16 +227,61 @@ header, footer {
     transition: transform .5s;
 }
 
-/*.page-current-link::before {
-    content: '';
-    position: absolute;
-    width: 19px;
-    height: 1px;
+.footer__logo {
+    margin-top: 68px;
+}
+
+.footer-copyrights {
+    font-size: 13px;
+    color: #9c9c9c;
+}
+
+.footer-copyrights span {
+    color: black;
+}
+
+.footer__social-icons {
+    display: flex;
+    width: 100%;
+    margin: 38px 0;
+    justify-content: center;
+    padding: 20px 0;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.footer__socials__item {
+    margin: 0 30px;
+    color: #777777;
+}
+
+.white-colored {
+    background-color: #ffffff;
+}
+
+.gallery__image {
     display: block;
-    border-bottom: 1px #06060a solid;
-    margin-left: -30px;
-    margin-top: 6px;
-}*/
+    width: 100%;
+}
+
+.header-modal-fix {
+    padding-right: 17px;
+}
+
+.modal__backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    overflow: auto;
+}
+
+.modal {
+    position: relative;
+    z-index: 9999;
+}
 
 .top-heading {
     display: flex;
@@ -332,13 +324,13 @@ header, footer {
     margin: 30px 0;
     line-height: 2;
     font-weight: normal;
-    text-transform: initial;
+    text-transform: none;
 }
 
 .text__regular-bold {
     font-size: 16px;
     font-weight: bold;
-    text-transform: initial;
+    text-transform: none;
 }
 
 .black-span {
@@ -402,7 +394,7 @@ header, footer {
 }
 
 .product__body {
-    text-transform: initial;
+    text-transform: none;
 }
 
 .product__date {
@@ -416,7 +408,7 @@ header, footer {
 
 .product__tags {
     font-size: 16px;
-    text-transform: initial;
+    text-transform: none;
     margin: 10px 0;
     color: #999999;
 }

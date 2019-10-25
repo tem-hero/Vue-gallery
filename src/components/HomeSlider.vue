@@ -128,7 +128,7 @@
 }
 
 .slider__control {
-    top: 50%;
+    top: calc(50% - 21px);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -173,7 +173,7 @@
 
 .slider-dots {
     bottom: 4%;
-    left: 50%;
+    left: calc(50% - 17px);
     text-align: center;
     transition: opacity .5s;
 }

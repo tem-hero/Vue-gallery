@@ -35,7 +35,7 @@ export default {
         return {
             recentPosts: [
                 {id: 1, title: 'Lorem ipsum dolor sit amet, consec', date: '2016-07-05', imgSrc: 'sidebar1.png'},
-                {id: 2, title: 'p>Ut wisi enim ad minim veniam, quis', date: '2016-07-17', imgSrc: 'sidebar2.png'},
+                {id: 2, title: 'Ut wisi enim ad minim veniam, quis', date: '2016-07-17', imgSrc: 'sidebar2.png'},
                 {id: 3, title: 'Aliquip ex ea commodo aliquam erat volutpat', date: '2016-07-21', imgSrc: 'sidebar3.png'},
                 {id: 4, title: 'Ut wisi enim ad minim veniam, quis', date: '2016-07-17', imgSrc: 'sidebar4.png'}
             ]

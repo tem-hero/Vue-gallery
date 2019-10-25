@@ -13,7 +13,7 @@
                 <div class="contact__adress-info">
                     <h2 class="text__cards-title font-lighter">office info</h2>
                     <p class="contact__adress__subtitle font-lighter">People Behind the Success of our Company</p>
-                    <hr class="contact__adress__line">
+                    <div class="contact__adress__div-line"></div>
 
                     <p class="contact__meet-time"><span class="contact__meet-time_span">Office Hours:</span>  Mon-Friday 8am - 10pm</p>
                     <p class="contact__meet-time"><span class="contact__meet-time_span">Address:</span>  gbalangao, Bugasong, Antique</p>
@@ -111,20 +111,20 @@
 .contact__adress__subtitle {
     font-size: 16px;
     margin-top: 5px;
-    text-transform: initial;
+    text-transform: none;
     color: #2f302f;
 }
 
-.contact__adress__line {
-    width: 15%;
-    margin: 18px 0 40px;
+.contact__adress__div-line {
+    width: 60px;
+    height: 40px;
+    margin-top: 18px;
     border-top: 1px solid #000000;
-    /*color: #000000;*/
 }
 
 .contact__meet-time, .contact__phone__p {
     font-size: 15px;
-    text-transform: initial;
+    text-transform: none;
 }
 
 .contact__meet-time {

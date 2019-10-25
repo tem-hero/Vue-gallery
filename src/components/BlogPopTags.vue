@@ -57,7 +57,7 @@
 .blog__aside-tags__a {
     color: #9c9c9c;
     font-size: 13px;
-    text-transform: initial;
+    text-transform: none;
     border: 1px #eeeeee solid;
     padding: 5px 15px;
     cursor: pointer;

@@ -35,7 +35,6 @@
 
                     v-for="item of socials"
                     :key="item.id"
-                    :title="item.name"
                     :href="item.socialLink"
                     class="portfolio__socials__item"
                     @click.prevent

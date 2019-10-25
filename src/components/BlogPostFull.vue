@@ -146,10 +146,11 @@ export default {
 }
 
 .blog__single-post__p {
+    width: 100%;
     margin: 15px 67px;
     line-height: 2.15;
     letter-spacing: 0.022rem;
-    text-transform: initial;
+    text-transform: none;
 }
 
 .blog__single-post__img {
@@ -157,7 +158,8 @@ export default {
 }
 
 .blog__single-post__quote {
-    text-transform: initial;
+    width: 100%;
+    text-transform: none;
     padding: 17px 10px 20px 40px;
     margin: 18px 0;
     border: 1px #e1e1e1 solid;

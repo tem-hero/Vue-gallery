@@ -53,7 +53,7 @@
 
                 ><i class="far fa-calendar"></i> on {{ setDate(post.date) }}
                 </time>
-                <span class="blog__post__icons"><i class="fas fa-share-alt"></i> <i class="fas fa-heart"></i></span>
+                <span class="blog__post__icons"><i class="fas fa-share-alt"></i><i class="fas fa-heart"></i></span>
             </section>
         </div>
     </article>
@@ -87,7 +87,7 @@ export default {
     position: relative;
     height: auto;
     padding: 30px 40px 40px;
-    text-transform: initial;
+    text-transform: none;
 }
 
 .blog__post__title {
@@ -119,6 +119,7 @@ export default {
     position: absolute;
     right: 37px;
     color: #cccccc;
+    cursor: default;
 }
 
 .blog__post__icons .fa-heart {

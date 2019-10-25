@@ -185,6 +185,7 @@ export default {
     top: 60px;
     left: -1px;
     width: 198px;
+    z-index: 30;
 }
 
 .portfolio__menu-show-all_shadow {

@@ -75,6 +75,7 @@ export default {
 
 .modal-container {
     max-width: 1000px;
+    width: 100%;
     box-shadow: 2px 2px 20px 1px;
     background-color: #ffffff;
 }
